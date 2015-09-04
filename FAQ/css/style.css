@@ -1,4 +1,37 @@
 /***************************ALL SCREENS*********************/
+.test {
+	color:red;
+}
+#Neighborhood {
+	display: none;
+}
+#Elevation {
+	display: none;
+}
+#Floorplan {
+	display: none;
+}
+#Colortool {
+	display: none;
+}
+#Siteplan {
+	display: none;
+}
+#Colorschemes {
+	display: none;
+}
+.hide {
+	display: none;
+}
+.errorC {
+	color: #FF0000;
+}
+.buttonDiv .contentDiv {
+	width: 230px !important;
+	height: 200px !important;
+	max-width: 230px;
+	max-height: 200px;
+}
 .infoDiv {
 	padding-bottom: 20px; 
 	padding-top: 20px; 
@@ -15,7 +48,6 @@
 	padding-left: 10px; 
 	padding-right: 20px;
 }
-
 .revealImg {
 	width: 100px;
 	height: 100px;
@@ -54,12 +86,14 @@ background: #558B2F;
 }
 .sticky {
 	position: fixed;
-	width: 100%;
-	left: 0;
 	top: 0;
-	z-index: 100;
+	width: 100%;
+	z-index: 150;
 	border-top: 0;
 	box-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+}
+.stickyHeader {
+	margin-top: 95px !important;
 }
 .topDiv {
 	background-color: #3B6120;
@@ -112,6 +146,26 @@ background: #558B2F;
 	margin-bottom: 0px;
 	background-color: #EFEFEF;
 }
+.accordion .accordion-navigation .video_image_p{
+	min-height: 200px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+.accordion .accordion-navigation .image_p{
+	min-height: 150px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+.accordion .accordion-navigation .video_p{
+	min-height: 100px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+.accordion .accordion-navigation ._p{
+	min-height: 100px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
 .accordion {
 	box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 }
@@ -121,11 +175,14 @@ background: #558B2F;
 .accordion .accordion-navigation .questionHover:hover {
 	background-color: #e3e3e3 !important;
 }
+.qContent {
+	background-color: white !important;
+}
 .qContent p {
 	line-height: 2;
 	margin-bottom: 0px;
 }
-.active a {
+.outline {
 	outline: 3px solid #558B2F;
 }
 .videoButton {
@@ -138,6 +195,10 @@ background: #558B2F;
 	margin-bottom: 0px;
 }
 .revealDiv .videoButton:hover {
+	background-color: #D50000 !important;
+	color: white !important;
+}
+.submitButton .videoButton:hover {
 	background-color: #D50000 !important;
 	color: white !important;
 }
@@ -197,6 +258,14 @@ background: #558B2F;
 .button3 .button {
 	margin: 0px;
 }
+.submit {
+	float:right;
+	margin: 0px;
+	width: auto;
+}
+.large-2 {
+	width:100%;
+}
 .copyright {
 	background-color: #3B6120;
 	margin: 0px;
@@ -215,6 +284,9 @@ background: #558B2F;
 
 /**********************SMALL SCREEN*****************************/
 @media screen and (max-width: 450px) {
+	.stickyHeader {
+		margin-top: -10px !important;
+	}
 	.accordion-navigation a {
 		border-top: 1px solid #ddd;
 	}
@@ -331,10 +403,28 @@ background: #558B2F;
 	.copyrightP {
 		font-size: 12px;
 	}
+	.accordion .accordion-navigation .video_image_p{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	.accordion .accordion-navigation .image_p{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	.accordion .accordion-navigation .video_p{
+		padding-left: 20px;
+		padding-right: 20px;	}
+	.accordion .accordion-navigation ._p{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 }
 
 /*********************SMALL-MEDIUM SCREEN***********************/
 @media screen and (min-width: 451px) and (max-width: 680px) {
+	.stickyHeader {
+		margin-top: -10px !important;
+	}
 	.accordion-navigation a {
 		border-top: 1px solid #ddd;
 	}
@@ -404,29 +494,6 @@ background: #558B2F;
 	.revealImg:hover {
 		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 	}
-	.reveal-modal {
-		top: 275px !important;
-	}
-	.accordion .accordion-navigation .video_image_p{
-		min-height: 200px;
-		padding-left: 50px;
-		padding-right: 50px;
-	}
-	.accordion .accordion-navigation .image_p{
-		min-height: 150px;
-		padding-left: 50px;
-		padding-right: 50px;
-	}
-	.accordion .accordion-navigation .video_p{
-		min-height: 100px;
-		padding-left: 50px;
-		padding-right: 50px;
-	}
-	.accordion .accordion-navigation ._p{
-		min-height: 100px;
-		padding-left: 50px;
-		padding-right: 50px;
-	}
 	.button1 {
 		float: left; 
 	}
@@ -455,6 +522,9 @@ background: #558B2F;
 
 /***************MEDIUM SCREEN*******************/
 @media screen and (min-width: 681px) and (max-width: 750px) {
+	.accordion-navigation a {
+		border-top: 1px solid #ddd;
+	}
 	.accordionDiv {
 		padding-top: 50px;
 		padding-bottom: 50px;
@@ -475,8 +545,6 @@ background: #558B2F;
 	.navDiv {
 		margin: 0px;
 		width: 100%;
-		padding-top: 3px;
-		padding-bottom: 3px;
 	}
 	.navDiv img {
 		min-width: 40%;
@@ -501,9 +569,6 @@ background: #558B2F;
 	.revealImg:hover {
 		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 	}
-	.reveal-modal {
-		top: 275px !important;
-	}
 	.contactDiv {
 		width: 100%;
 		height: 100%;
@@ -516,6 +581,10 @@ background: #558B2F;
 }
 /***************LARGE SCREEN*******************/
 @media screen and (min-width: 751px) {
+	.paddingI {
+		padding-top: 16px;
+		padding-left: 16px;
+	}
 	.off-canvas-wrap {
 	display: none;
 	}
@@ -525,8 +594,6 @@ background: #558B2F;
 	.navDiv {
 		margin: 0px;
 		width: 100%;
-		padding-top: 3px;
-		padding-bottom: 3px;
 	}
 	.navDiv label {
 		color: white;
@@ -554,32 +621,9 @@ background: #558B2F;
 	.revealImg:hover {
 		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 	}
-	.reveal-modal {
-		top: 275px !important;
-	}
-	.accordion .accordion-navigation .video_image_p{
-		min-height: 200px;
-		padding-left: 50px;
-		padding-right: 50px;
-	}
-	.accordion .accordion-navigation .image_p{
-		min-height: 150px;
-		padding-left: 50px;
-		padding-right: 50px;
-	}
-	.accordion .accordion-navigation .video_p{
-		min-height: 100px;
-		padding-left: 50px;
-		padding-right: 50px;
-	}
-	.accordion .accordion-navigation ._p{
-		min-height: 100px;
-		padding-left: 50px;
-		padding-right: 50px;
-	}
 	.buttonDiv .contentDiv {
-		max-width: 230px;
-		max-height: 200px;
+		width: 230px;
+		height: 200px;
 	}
 	.contactDiv {
 		width: 100%;

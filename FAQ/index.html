@@ -3,10 +3,12 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset ="utf-8">
-	<title>Rendering House Dashboard FAQ PAGE</title>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style2.css">
+	<title>RH Dashboard - FAQs</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/
+	ajax/libs/foundicons/3.0.0/foundation-icons.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
+	foundation/5.5.2/css/foundation.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 	<div class="header">
@@ -14,101 +16,99 @@
 			<a href="http://www.renderinghouse.com/" target="_blank">
 				<img src="images/RH-logo.png" class="comLogo"></img>
 			</a>
-			<h3 class="headerH3">Dashboard(Backend)</h3>
+			<h3 class="headerH3">Dashboard FAQs</h3>
 		</div>
 
 		<div class="off-canvas-wrap" data-offcanvas>
 			<div class="inner-wrap">
-			<nav class="tab-bar">
-				<section class="left-small">
-				<a href="#" class="left-off-canvas-toggle menu-icon"><span></span></a>
-				</section>
-				<section class="right tab-bar-section">
-			    	<h1 class="title">Sections</h1>
-			    </section>
-			</nav>
-			<aside class="left-off-canvas-menu">
-				<ul class="off-canvas-list">
-					<!--
-					<li><label>Sections</label></li>
-					<li><a href="#">Neighborhood</a></li>
-					<li><a href="#">Elevation</a></li>
-					<li><a href="#">Floorplan</a></li>
-					<li><a href="#">Neighborhood</a></li>
-					<li><a href="#">Neighborhood</a></li>
-					<li><a href="#">Neighborhood</a></li>
-				-->
-					<div class="icon-bar vertical six-up">
-						<a href="neighborhood.html" class="item border">
-							<img src="images/neighborhoodW.png"></img>
-							<label id="itemlabel1">Neighborhood</label>
-						</a>
-						<a href="elevation.html" class="item border">
-							<img src="images/elevationW.png"></img>
-							<label id="itemlabel2">Elevation</label>
-						</a>
-						<a href="floorplan.html" class="item border">
-							<img src="images/floorplanW.png"></img>
-							<label id="itemlabel3">Floorplan</label>
-						</a>
-						<a href="colortool.html" class="item border">
-							<img src="images/colortool.png"></img>
-							<label id="itemlabel4">Color Tool</label>
-						</a>
-						<a href="siteplan.html" class="item border">
-							<img src="images/siteplanW.png"></img>
-							<label id="itemlabel5">Site Plan</label>
-						</a>
-						<a href="colorschemes.html" class="item">
-							<img src="images/colorschemes1.png"></img>
-							<label id="itemlabel6">Color Schemes</label>
-						</a>
+				<nav class="tab-bar">
+					<section class="left-small">
+						<a href="#" class="left-off-canvas-toggle menu-icon">
+						<span></span></a>
+					</section>
+					<section class="right tab-bar-section">
+				    	<h1 class="title">Sections</h1>
+				    </section>
+				</nav>
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<div class="icon-bar vertical six-up">
+							<a href="neighborhood.html" class="item border neighborhood-click">
+								<img src="images/neighborhoodW.png"></img>
+								<label id="itemlabel1">Neighborhood</label>
+							</a>
+							<a href="elevation.html" class="item border elevation-click">
+								<img src="images/elevationW.png"></img>
+								<label id="itemlabel2">Elevation</label>
+							</a>
+							<a href="floorplan.html" class="item border floorplan-click">
+								<img src="images/floorplanW.png"></img>
+								<label id="itemlabel3">Floorplan</label>
+							</a>
+							<a href="colortool.html" class="item border colortool-click">
+								<img src="images/colortool.png"></img>
+								<label id="itemlabel4">Color Tool</label>
+							</a>
+							<a href="siteplan.html" class="item border siteplan-click">
+								<img src="images/siteplanW.png"></img>
+								<label id="itemlabel5">Site Plan</label>
+							</a>
+							<a href="colorschemes.html" class="item colorschemes-click">
+								<img src="images/colorschemes1.png"></img>
+								<label id="itemlabel6">Color Schemes</label>
+							</a>
+						</div>
+					</ul>
+				</aside>
+				<section class="main-section">
+	      			<div class="headerImg headerImg1">
+						<h1>Frequently Asked Questions<h1>
+						<a href="http://www.renderinghouse.com/dashboard/" target="_blank" 
+						class="headerButton button medium radius">OPEN DASHBOARD</a>
 					</div>
-				</ul>
-			</aside>
-			<section class="main-section">
-      			<div class="headerImg headerImg1">
-					<h1>Frequently Asked Questions<h1>
-					<a href="http://www.renderinghouse.com/dashboard/" target="_blank" class="headerButton button medium radius">OPEN DASHBOARD</a>
-				</div>
-   			 </section>
-			<a class="exit-off-canvas"></a>
+	   			 </section>
+				<a class="exit-off-canvas"></a>
 			</div>
 		</div>
-
-
 		<div class="navDiv nav icon-bar six-up" role="navigation">
-			<a href="neighborhood.html" class="item" aria-labelledby="#itemlabel1" role="button" tabindex="0">
+			<a href="neighborhood.html" class="item neighborhood-click" aria-labelledby="#itemlabel1" 
+			role="button" tabindex="0">
 				<img src="images/neighborhoodW.png"></img>
 				<label id="itemlabel1">Neighborhood</label>
 			</a>
-			<a href="elevation.html" class="item" aria-labelledby="#itemlabel2" role="button" tabindex="0">
+			<a href="elevation.html" class="item elevation-click" aria-labelledby="#itemlabel2" 
+			role="button" tabindex="0">
 				<img src="images/elevationW.png"></img>
 				<label id="itemlabel2">Elevation</label>
 			</a>
-			<a href="floorplan.html" class="item" aria-labelledby="#itemlabel3" role="button" tabindex="0">
+			<a href="floorplan.html" class="item floorplan-click" aria-labelledby="#itemlabel3" 
+			role="button" tabindex="0">
 				<img src="images/floorplanW.png"></img>
 				<label id="itemlabel3">Floorplan</label>
 			</a>
-			<a href="colortool.html" class="item" aria-labelledby="#itemlabel4" role="button" tabindex="0">
+			<a href="colortool.html" class="item colortool-click" aria-labelledby="#itemlabel4" 
+			role="button" tabindex="0">
 				<img src="images/colortool.png"></img>
 				<label id="itemlabel4">Color Tool</label>
 			</a>
-			<a href="siteplan.html" class="item" aria-labelledby="#itemlabel5" role="button" tabindex="0">
+			<a href="siteplan.html" class="item siteplan-click" aria-labelledby="#itemlabel5" 
+			role="button" tabindex="0">
 				<img src="images/siteplanW.png"></img>
 				<label id="itemlabel5">Site Plan</label>
 			</a>
-			<a href="colorschemes.html" class="item" aria-labelledby="#itemlabel6" role="button" tabindex="0">
+			<a href="colorschemes.html" class="item colorschemes-click" aria-labelledby="#itemlabel6" 
+			role="button" tabindex="0">
 				<img src="images/colorschemes1.png"></img>
 				<label id="itemlabel6">Color Schemes</label>
 			</a>
 		</div>
 		<div class="headerImg headerImg2">
 			<h1>Frequently Asked Questions<h1>
-			<a href="http://www.renderinghouse.com/dashboard/" target="_blank" class="headerButton button medium radius">OPEN DASHBOARD</a>
+			<a href="http://www.renderinghouse.com/dashboard/" target="_blank" 
+			class="headerButton button medium radius">OPEN DASHBOARD</a>
 		</div>
 	</div>
-	<div class="body">
+	<div class="Welcome">
 		<div class="subheader">
 			<h2>Welcome to the Dashboard FAQ page!</h2>
 		</div>
@@ -296,9 +296,12 @@
 			<h3>Contact Us!</h3>
 			<div class="buttonDiv">
 				<div class="button1">
-				<a href="#" class="button tiny radius footerButton" data-options="align:top" data-dropdown="drop2" aria-controls="drop2" aria-expanded="false">CONTACT INFO</a>
+					<a href="#" class="button tiny radius footerButton" 
+					data-options="align:top" data-dropdown="drop2" aria-controls="drop2" 
+					aria-expanded="false">CONTACT INFO</a>
 				</div>
-				<div data-dropdown-content id="drop2" class="contentDiv f-dropdown content" aria-hidden="true" tabindex="-1">
+				<div data-dropdown-content id="drop2" class="contentDiv f-dropdown 
+					content" aria-hidden="true" tabindex="-1">
 					<div class="contactDiv">
 						<p>376 Raleigh St<br>Holly Springs, NC 27540</p>
 						<p>info@renderinghouse.com</p>
@@ -306,62 +309,87 @@
 					</div>
 				</div>
 				<div class="button2 formFooterDiv">
-				<a href="#" data-reveal-id="formModal" class="reveal footerButton button tiny radius">CONTACT FORM</a>
+					<a href="#" data-reveal-id="formModal" class="reveal footerButton 
+					button tiny radius">CONTACT FORM</a>
 				</div>
-				<div data-reveal id="formModal" class="reveal-modal large" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-					<form>
-						<h8>Fields marked with an * are required.</h8>
+				<div data-reveal id="formModal" class="reveal-modal large" 
+				aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+					<form data-abide name="myForm" id="contactForm" method="post" action="php/form.php">
 						<div class="row">
-							<div class="large-6 columns">
-								<label>Name*
-									<input type="text" placeholder="Name..."/>
+							<div class="large-12 columns name-field">
+								<label>Name <small>required</small>
+									<input name="name" class="input" type="text" placeholder="Name..."/ required>
 								</label>
-							</div>
-							<div class="large-6 columns">
-								<label>Email*
-									<input type="text" placeholder="Email..."/>
-								</label>
+								<small class="error">Name is required and must be a string.</small>
 							</div>
 						</div>
 						<div class="row">
-							<div class="large-12 columns">
-								<label>Message*
-									<textarea placeholder="Message..."></textarea>
+							<div class="large-12 columns tel-field">
+								<label>Phone <small>required</small>
+									<input name="phone" class="input" type="tel" placeholder="Phone..." required/>
 								</label>
+								<small class="error">Phone is required and must be a number.</small>
 							</div>
 						</div>
 						<div class="row">
-							<div class="large-3 columns">
-								<label>Is this urgent?</label>
-								<input id="checkbox1" type="checkbox">
+							<div class="large-12 columns email-field">
+								<label>Email <small>required</small>
+									<input name="email" class="input" type="email" placeholder="Email..."/ required>
+								</label>
+								<small class="error">A valid email address is required.</small>
+							</div>
+						</div>
+						<div class="row">
+							<div class="large-12 columns text-field">
+								<label>Message <small>required</small>
+									<textarea name="message" placeholder="Message..." required></textarea>
+								</label>
+								<small class="error">A message is required.</small>
+							</div>
+						</div>
+						<div class="row">
+							<div class="large-6 columns checkbox-field">
+								<label>What is your preferred method of contact?</label>
+								<input name="emailCheck" id="checkbox1" type="checkbox"><label for="checkbox1">Email</label>
+								<input name="callCheck" id="checkbox2" type="checkbox"><label for="checkbox2">Call</label>
+								<input name="textCheck" id="checkbox3" type="checkbox"><label for="checkbox3">Text</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="large-4 columns">
-								<label>What is 13 minus 6?*
-									<input type="text" placeholder="test"/>
+								<label>What is 13 minus 6? <small>required</small>
+									<input name="test" type="number" placeholder="13-6=?" required pattern="7"/>
 								</label>
+								<small class="error">A valid answer is required.</small>
 							</div>
 						</div>
-
+						<div class="row">
+							<div class="large-2 columns submitButton">
+								<button class="submit videoButton" type="submit" value="Submit">Send</button>
+							</div>
+						</div>
 					</form>
 					<a class="close-reveal-modal" aria-label="close">
 						<i class="fi-x"></i>
 					</a>
 				</div>
 				<div class="button3">
-				<a href="http://www.facebook.com/renderinghouse" target="_blank" class="footerButton button tiny radius">FACEBOOK PAGE</a>
+					<a href="http://www.facebook.com/renderinghouse" target="_blank" 
+					class="footerButton button tiny radius">FACEBOOK PAGE</a>
 				</div>
 			</div>
 		</div>
 		<div class="copyright">
-			<p class="copyrightP">Copyright© 2015  RenderingHouse.  All rights reserved.</p>
+			<p class="copyrightP">Copyright© 2015  RenderingHouse.  All rights 
+			reserved.</p>
 		</div>
 	</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js"></script>
-<script src="js/faq.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/
+foundation.min.js"></script>
+<script src="js/faq2.js"></script>
 <script src="js/event.js"></script>
 </body>
 </html>
