@@ -1,6 +1,31 @@
 /***************************ALL SCREENS*********************/
-.test {
-	color:red;
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -183px;
+}
+.footer, .push {
+    height: 183px; 
+}
+.push {
+	background-color: #EFEFEF;
+}
+.scroll {
+	overflow-y: auto;
+}
+.item7 {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+#General {
+	display: none;
 }
 #Neighborhood {
 	display: none;
@@ -20,11 +45,20 @@
 #Colorschemes {
 	display: none;
 }
-.hide {
-	display: none;
+.flex-video {
+	margin-bottom: 0px;
 }
-.errorC {
-	color: #FF0000;
+.reveal-modal {
+	padding: 50px;
+	min-height: 0px;
+	/*top: 0px !important;*/
+	position: fixed;
+	max-height: 710px;
+	max-width: 660px !important;
+}
+.modalImg {
+	max-height: 598.5px;
+	/*598.5px*/
 }
 .buttonDiv .contentDiv {
 	width: 230px !important;
@@ -56,33 +90,29 @@
 	margin-bottom: 10px;
 }
 .tab-bar {
-	background-color: #689F38;
+	background-color: #52a4da;
 }
 .left-small {
 	border-right: none;
-}
-.off-canvas-wrap {
-	height: 465px;
 }
 .move-right .inner-wrap {
 	margin-left: -114px;
 }
 .left-off-canvas-menu {
 	width: 150px;
-	height: 465px;
-	background-color: #689F38;
+	/*background-color: #52a4da;*/
 }
 .icon-bar {
-	background-color: #689F38;
+	background-color: #52a4da;
 }
 .item {
-	background-color: #689F38;
+	background-color: #52a4da;
 	max-height: 80px;
 	border: none;
 	outline: none;
 }
 .icon-bar .item:hover{
-background: #558B2F;
+background: #7bb9c5;
 }
 .sticky {
 	position: fixed;
@@ -93,10 +123,10 @@ background: #558B2F;
 	box-shadow: 0px 2px 3px rgba(0,0,0,0.5);
 }
 .stickyHeader {
-	margin-top: 95px !important;
+	margin-top: 105px !important;
 }
 .topDiv {
-	background-color: #3B6120;
+	background-color: #214f86;
 	margin: 0px;
 	padding-bottom: 1px;
 	width: 100%;
@@ -108,7 +138,7 @@ background: #558B2F;
 	margin: 0px;
 	padding-right: 20px;
 	color: white;
-	background-color: #3B6120;
+	background-color: #214f86;
 	height: 55px;
 	padding-top: 10px;
 }
@@ -141,8 +171,8 @@ background: #558B2F;
 }
 .accordionDiv {
 	padding-right: 20px;
-	padding-bottom: 70px;
-	padding-top: 70px;
+	padding-bottom: 50px;
+	padding-top: 50px;
 	margin-bottom: 0px;
 	background-color: #EFEFEF;
 }
@@ -183,23 +213,24 @@ background: #558B2F;
 	margin-bottom: 0px;
 }
 .outline {
-	outline: 3px solid #558B2F;
+	outline: 3px solid #214f86;
 }
 .videoButton {
-	border: 1px solid #D50000 !important;
+	border: 3px solid #7bb9c5 !important;
 	background-color: white !important;
-	color: #D50000 !important;
+	color: #7bb9c5 !important;
 	outline: none;
 	width:100px;
 	max-width: 100%;
 	margin-bottom: 0px;
 }
 .revealDiv .videoButton:hover {
-	background-color: #D50000 !important;
+	background-color: #7bb9c5 !important;
+	border: 3px solid #7bb9c5 !important;
 	color: white !important;
 }
 .submitButton .videoButton:hover {
-	background-color: #D50000 !important;
+	background-color: #7bb9c5 !important;
 	color: white !important;
 }
 .accordion .fi-plus{
@@ -217,7 +248,7 @@ background: #558B2F;
   padding-right: 30px;
 }
 .contact {
-	background-color: #689F38;
+	background-color: #52a4da;
 	padding-top: 10px;
 }
 .contact h3 {
@@ -228,17 +259,21 @@ background: #558B2F;
 	padding-left: 20px;
 	width: 100%;
 	max-width: 750px;
+	display: -webkit-flex;
 	display: flex;
 	padding-top: 10px;
 }
 .buttonDiv .footerButton {
-	background-color: #D50000;
-	border: none;
-	box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+	border: 3px solid #7bb9c5 !important;
+	background-color: #52a4da !important;
+	color: #7bb9c5 !important;
+	font-weight: bold;
 	vertical-align: middle;
 }
 .buttonDiv .footerButton:hover {
-	background-color: #bf0000;
+	background-color: #7bb9c5 !important;
+	box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+	color: white !important;
 }
 .button1 {
 	width: 33.333%;
@@ -267,7 +302,7 @@ background: #558B2F;
 	width:100%;
 }
 .copyright {
-	background-color: #3B6120;
+	background-color: #214f86;
 	margin: 0px;
 	height: 55px;
 	width: 100%;
@@ -284,8 +319,32 @@ background: #558B2F;
 
 /**********************SMALL SCREEN*****************************/
 @media screen and (max-width: 450px) {
+	.reveal-modal {
+		padding: 10px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		min-height: 0px;
+	}
+	#myModal, #videoModal {
+		position: fixed;
+		max-height: 550px;
+		max-width: 660px !important;
+		top: 0px !important;
+	}
+	#formModal {
+		position: absolute;
+	}
+	.modalImg {
+		max-height: 598.5px;
+		/*598.5px*/
+	}
+	.close-reveal-modal {
+		top: 0px !important;
+		right: 5px !important;
+		font-size: 1.2rem !important;
+	}
 	.stickyHeader {
-		margin-top: -10px !important;
+		margin-top: 0px !important;
 	}
 	.accordion-navigation a {
 		border-top: 1px solid #ddd;
@@ -302,7 +361,7 @@ background: #558B2F;
 	.navDiv {
 		display: none;
 	}
-	.headerImg2 {
+	.body2 {
 		display: none;
 	}
 	.icon-bar.six-up .item {
@@ -310,12 +369,12 @@ background: #558B2F;
 	}
 	.subheader h2 {
 		padding-left: 20px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-	}
-	.accordionDiv {
 		padding-top: 20px;
 		padding-bottom: 20px;
+	}
+	.accordionDiv {
+		padding-top: 50px;
+		padding-bottom: 50px;
 		padding-right: 0px;
 		margin-left: -20px;
 	}
@@ -331,16 +390,8 @@ background: #558B2F;
 	.accordion .active .fi-minus{
 	  display: none;
 	}
-	.revealImg {
-		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-	}
 	.revealDiv a {
 		border: none;
-	}
-	.videoButton {
-		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-		background-color: red !important;
-		color: white !important;
 	}
 	.video_image_p .videoButton {
 		width: 50%;
@@ -418,12 +469,18 @@ background: #558B2F;
 		padding-left: 20px;
 		padding-right: 20px;
 	}
+	.revealImg:hover {
+		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+	}
 }
 
 /*********************SMALL-MEDIUM SCREEN***********************/
-@media screen and (min-width: 451px) and (max-width: 680px) {
+@media screen and (min-width: 451px) and (max-width: 770px) {
+	.reveal-modal {
+		top: 0px !important;
+	}
 	.stickyHeader {
-		margin-top: -10px !important;
+		margin-top: 0px !important;
 	}
 	.accordion-navigation a {
 		border-top: 1px solid #ddd;
@@ -440,7 +497,7 @@ background: #558B2F;
 	.navDiv {
 		display: none;
 	}
-	.headerImg2 {
+	.body2 {
 		display: none;
 	}
 	.icon-bar.six-up .item {
@@ -448,12 +505,12 @@ background: #558B2F;
 	}
 	.subheader h2 {
 		padding-left: 20px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-	}
-	.accordionDiv {
 		padding-top: 20px;
 		padding-bottom: 20px;
+	}
+	.accordionDiv {
+		padding-top: 50px;
+		padding-bottom: 50px;
 		padding-right: 0px;
 		margin-left: -20px;
 	}
@@ -473,7 +530,7 @@ background: #558B2F;
 		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 		margin-bottom: 0px;
 	}
-	.videoButton {
+	.video_image_p .videoButton {
 		margin-top: 10px;
 	}
 	.revealDiv a {
@@ -521,7 +578,10 @@ background: #558B2F;
 }
 
 /***************MEDIUM SCREEN*******************/
-@media screen and (min-width: 681px) and (max-width: 750px) {
+@media screen and (min-width: 771px) and (max-width: 860px) {
+	.reveal-modal {
+		top: 0px !important;
+	}
 	.accordion-navigation a {
 		border-top: 1px solid #ddd;
 	}
@@ -539,7 +599,7 @@ background: #558B2F;
 	.off-canvas-wrap {
 	display: none;
 	}
-	.headerImg1 {
+	.body1 {
 		display: none;
 	}
 	.navDiv {
@@ -549,14 +609,8 @@ background: #558B2F;
 	.navDiv img {
 		min-width: 40%;
 	}
-	.icon-bar {
-		background-color: #689F38;
-	}
 	.item {
-		background-color: #689F38;
 		max-height: 95px;
-		border: none;
-		outline: none;
 	}
 	.revealDiv {
 		height: auto;
@@ -580,7 +634,10 @@ background: #558B2F;
 	}
 }
 /***************LARGE SCREEN*******************/
-@media screen and (min-width: 751px) {
+@media screen and (min-width: 861px) {
+	.reveal-modal {
+		top: 0px !important;
+	}
 	.paddingI {
 		padding-top: 16px;
 		padding-left: 16px;
@@ -588,7 +645,7 @@ background: #558B2F;
 	.off-canvas-wrap {
 	display: none;
 	}
-	.headerImg1 {
+	.body1 {
 		display: none;
 	}
 	.navDiv {
@@ -598,14 +655,8 @@ background: #558B2F;
 	.navDiv label {
 		color: white;
 	}
-	.icon-bar {
-		background-color: #689F38;
-	}
 	.item {
-		background-color: #689F38;
 		max-height: 95px;
-		border: none;
-		outline: none;
 	}
 	.i {
 		float: left;

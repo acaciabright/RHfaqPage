@@ -1,7 +1,9 @@
 <?php 
 	$to = 'dashboardfaqtest@gmail.com'; 
 	$subject = 'Dashboard FAQ contact'; 
-	$name = $_POST['name']; 
+	$firstName = $_POST['firstName']; 
+	$lastName = $_POST['lastName']; 
+	$company = $_POST['company'];
 	$phone = $_POST['phone'];
 	$email = $_POST['email'];
 	$text = $_POST['message'];
@@ -12,26 +14,24 @@
 	if(isset($eCheck) && $eCheck == 'on') {
 	    $emailCheck = "Email";
 	}
-	if(isset($cCheck) && $cCheck == 'on') {
+	else if(isset($cCheck) && $cCheck == 'on') {
 	    $callCheck = "Call";
 	}
-	if(isset($tCheck) && $tCheck == 'on') {
+	else if(isset($tCheck) && $tCheck == 'on') {
 	    $textCheck = "Text";
 	}
 	else {
 	    $noCheck = "None";
 	}  
 
-	$message = "From: $name \nEmail: $email \nPhone: $phone \nPreferred method of contact: $emailCheck $callCheck $textCheck $noCheck \nMessage: $text \n";
-
-	$index = "../index2.html";
+	$message = "From: $firstName $lastName \nCompany: $company \nEmail: $email \nPhone: $phone \nPreferred method of contact: $emailCheck $callCheck $textCheck $noCheck \nMessage: $text \n";
 
 	$sent = mail($to, $subject, $message); 
 	if($sent) {
 	  echo "<div class='body'><h1 class='header'>Thank you for your message!</h1>
 	  <div class='wrapper'><p class='p'>Your email has been sent successfully and 
 	  we appreciate you getting in touch with us. We will be sending a reply soon.
-	  </p></div><div class='wrapper2'><a href='$index' class='button'>Return to 
+	  </p></div><div class='wrapper2'><a href='javascript: history.go(-1)' class='button'>Return to 
 	  Dashboard FAQs</a></div></div>"; 
 	}else{
 	  echo "<div class='body'><h1 class='header'>Sorry, your message wasn't sent.
@@ -89,11 +89,14 @@
 	    color: #fff;
 	    transition: background-color 300ms ease-out;
 	    text-align: center;
-	    background-color: #D50000;
-    	box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+	    border: 3px solid #7bb9c5 !important;
+		background-color: white !important;
+		color: #7bb9c5 !important;
 	}
 	.button:hover {
-		background-color: #bf0000;
+		background-color: #7bb9c5 !important;
+		border: 3px solid #7bb9c5 !important;
+		color: white !important;
 	}
 </style>
 

@@ -16,6 +16,7 @@ _Section.prototype.set = function(prop, newVal) {
 }
 
 function _Accordion() {
+	this.general = [];
 	this.neighborhood = [];
 	this.elevation = [];
 	this.floorplan = [];
@@ -37,6 +38,7 @@ _Accordion.prototype.getObjects = function(dest) {
 
 var _deferreds = [];
 var accordion = new _Accordion();
+var _generalArray;
 var _neighborhoodArray;
 var _elevationArray;
 var _floorplanArray;
@@ -46,6 +48,32 @@ var _colorschemesArray;
 
 var accordionDeferred = $.Deferred();
 _deferreds.push(accordionDeferred);
+
+var generalRequest = $.ajax({
+	type: "POST",
+	url: 'php/getData.php',
+	data: {
+		"table": "Topics",
+		"sort": "question",
+		"section": "GENERAL"
+	}
+});
+generalRequest.done(function(data) {
+	if(data.search('OK') < 0) {
+		console.log('Failed somehow' + data);
+	} else {
+		var split = data.split("^S^P^L^I^T^");
+		_colorschemesArray = $.parseJSON(split[1]); 
+		for(i in _generalArray) {
+			var curAccordion = _generalArray[i];
+			var generalObject = new _Section($(curAccordion));
+			accordion.addObject(generalObject, 'general');
+		}
+	}
+});
+generalRequest.fail(function(data) { 
+	console.log('Failed somehow' + data);
+});
 
 var neighborhoodRequest = $.ajax({
 	type: "POST",
@@ -215,11 +243,18 @@ function _FAQ(el) {
 	});
 }
 
+var mainSection = document.getElementsByClassName("main-section");
 var header = document.getElementsByClassName("header");
+var push = $('<div>').addClass("push");
+$(body2).append(push);
 var body = $('<div>').attr({
-	'class': 'body'
+	'class': 'body body1'
 });
-$(header).after(body);
+var body2 = $('<div>').attr({
+	'class': 'body body2'
+});
+$(mainSection).append(body);
+$(header).after(body2);
 
 var counter = 1;
 _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryText, panel) {
@@ -292,7 +327,200 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 		}
 		var imgReveal = $('<div data-reveal>').attr({
 			'id': 'myModal',
+			'class': 'reveal-modal medium',
+			'aria-labelledby': 'modalTitle',
+			'aria-hidden': 'true',
+			'role': 'dialog'
+		});
+		if (data.get('screenShot') !== null) {
+			answer.append(imgReveal);
+		}
+		var modalImg = $('<img>').attr({
+			'src': data.get('screenShot'),
+			'class': 'modalImg'
+		});
+		if(data.get('screenShot') != null) {
+			imgReveal.append(modalImg);
+		}
+		var imgClose = $('<a>').attr({
+			'class': 'close-reveal-modal',
+			'aria-label': 'close'
+		});
+		imgReveal.append(imgClose);
+		var imgX = $('<i>').addClass("fi-x");
+		imgClose.append(imgX);
+
+		var videoReveal = $('<div data-reveal>').attr({
+			'id': 'videoModal',
 			'class': 'reveal-modal large',
+			'aria-labelledby': 'videoModalTitle',
+			'aria-hidden': 'true',
+			'role': 'dialog'
+		});
+		if(data.get('videoURL') !== null) {
+			answer.append(videoReveal);
+		}
+		var videoDiv = $('<div>').addClass("flex-video widescreen vimeo");
+		videoReveal.append(videoDiv);
+		var video = $('<iframe allowfullscreen>').attr({
+			'width': '560',
+			'height': '315',
+			'src': data.get('videoURL'),
+			'class': 'video',
+			'frameborder': '0'		
+		});
+		if(data.get('videoURL') !== null) {
+			videoDiv.append(video);
+		}
+		var videoClose = $('<a>').attr({
+			'class': 'close-reveal-modal',
+			'aria-label': 'close'
+		});
+		videoReveal.append(videoClose);
+		var vidX = $('<i>').addClass("fi-x");
+		videoClose.append(vidX);
+
+		var p = $('<p>').attr({
+			'id': 'answerP' + counter,
+			'class': 'answer answerTwo' + counter
+		}).text(data.get('answer'));
+		if(data.get('answer') !== null) {
+			answer.append(p);
+		}
+
+		var revealImgTwo = $('.revealImgTwo' + counter);
+		var videoButtonTwo = $('.videoButtonTwo' + counter);
+		var revealDivTwo = $('.revealDivTwo' + counter);
+		var answerId = $('#' + (panel + counter));
+		if(revealImgTwo.length && videoButtonTwo.length) {
+			revealDivTwo.show();
+			answerId.addClass("video_image_p");
+			answerId.removeClass("image_p");
+			answerId.removeClass("video_p");
+			answerId.removeClass("_p");
+		}
+		else if(revealImgTwo.length && !videoButtonTwo.length) {
+			revealDivTwo.show();
+			answerId.removeClass("video_image_p");
+			answerId.addClass("image_p");
+			answerId.removeClass("video_p");
+			answerId.removeClass("_p");
+		}
+		else if(!revealImgTwo.length && videoButtonTwo.length) {
+			revealDivTwo.show();
+			answerId.removeClass("video_image_p");
+			answerId.removeClass("image_p");
+			answerId.addClass("video_p");
+			answerId.removeClass("_p");
+		}
+		else if(!revealImgTwo.length && !videoButtonTwo.length) {
+			revealDivTwo.hide();
+			answerId.removeClass("video_image_p");
+			answerId.removeClass("image_p");
+			answerId.removeClass("video_p");
+			answerId.addClass("_p");
+		}
+		else {
+			revealDivTwo.show();
+			answerId.removeClass("video_image_p");
+			answerId.removeClass("image_p");
+			answerId.removeClass("video_p");
+			answerId.removeClass("_p");
+		}
+		//•ul• = ul tags
+		//•li• = li tags
+		var answerTwo = document.getElementById("answerP" + counter);
+		if($(answerTwo).text().indexOf('•br•') >= 0) {
+			var res = answerTwo.innerHTML.replace(/•br•/g, "<br>");
+			answerTwo.innerHTML = res;
+		}
+		if($(answerTwo).text().indexOf('•ul•') >= 0) {
+			var res = answerTwo.innerHTML.replace(/•ul•/g, "<ul>");
+			answerTwo.innerHTML = res;
+		}
+		if($(answerTwo).text().indexOf('•li•') >= 0) {
+			var res = answerTwo.innerHTML.replace(/•li•/g, "<li>");
+			answerTwo.innerHTML = res;
+		}
+		if($(answerTwo).text().indexOf('Note:') >= 0) {
+			var res = answerTwo.innerHTML.replace(/Note:/g, "<b>Note:</b>");
+			answerTwo.innerHTML = res;
+		}
+		counter++;
+	}
+};
+
+_FAQ.prototype.addSection2 = function(headerText, sectionId, sectionText, entryText, panel) {
+	var main = this.el;
+	var sectionDiv = $('<div>').attr({
+		'id': sectionId
+	});
+	body2.append(sectionDiv);
+	var header = $('<div>').addClass("subheader");
+	sectionDiv.append(header);
+	var section = $('<h2>').text(headerText);
+	header.append(section);
+	var accordionDiv = $('<div>').addClass("accordionDiv");
+	sectionDiv.append(accordionDiv);
+	var ul = $('<ul data-accordion>').addClass("accordion");
+	accordionDiv.append(ul);
+
+	var database = accordion.getObjects(sectionText);
+	for (e in database) {
+		var data = database[e];
+
+		var questionOne = $('<li>').addClass("accordion-navigation");
+		ul.append(questionOne);
+
+		var question = $('<a>').attr({
+			'href': '#' + panel + counter,
+			'class': 'questionHover ' + entryText,
+			'data-id': counter
+		}).text(data.get('question'));
+		questionOne.append(question);
+		var iDiv = $('<div>').addClass("i");
+		question.append(iDiv);
+		var iPlus = $('<i>').addClass("fi-plus");
+		iDiv.append(iPlus);
+		var iMinus = $('<i>').addClass("fi-minus");
+		iDiv.append(iMinus);
+
+		var answer = $('<div>').attr({
+			'id': panel + counter,
+			'class': 'answer1 qContent content'
+		});
+		questionOne.append(answer);
+
+		var revealDiv = $('<div>').addClass("revealDiv revealDivTwo" + counter);
+		answer.append(revealDiv);
+		var imgModal = $('<a>').attr({
+			'href': '#',
+			'data-reveal-id': 'myModal',
+			'id': 'revealImg',
+			'class': 'reveal',
+			'style': 'outline:none'
+		});
+		revealDiv.append(imgModal);
+		var revealImg = $('<img>').attr({
+			'src': data.get('screenShot'),
+			'class': 'revealImg revealImgTwo' + counter
+		});
+		if (data.get('screenShot') !== null) {
+			imgModal.append(revealImg);
+		}
+		var videoModal = $('<a>').attr({
+			'href': '#',
+			'data-reveal-id': 'videoModal',
+			'id': 'video',
+			'class': 'reveal videoButton button small radius videoButtonTwo' + counter,
+			'style': 'outline: none'
+		}).text("VIDEO");
+		if(data.get('videoURL') !== null) {
+			revealDiv.append(videoModal);
+		}
+		var imgReveal = $('<div data-reveal>').attr({
+			'id': 'myModal',
+			'class': 'reveal-modal medium',
 			'aria-labelledby': 'modalTitle',
 			'aria-hidden': 'true',
 			'role': 'dialog'
@@ -393,36 +621,28 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 			answerId.removeClass("_p");
 		}
 
-		//ULO = ul opening tag
-		//ULc = ul closing tag
-		//LIO = li opening tag
-		//LIC = li closing tag
-		var answerP = data.get('answer');
+		//•ul• = ul tags
+		//•li• = li tags
+		//since answer column is text below code is needed
+		//if answer column was varchar below code would not be needed
 		var answerTwo = document.getElementById("answerP" + counter);
-		if($(answerTwo).text().indexOf('LINEBREAK') >= 0) {
-			var res = answerTwo.innerHTML.replace(/LINEBREAK/g, "<br>");
+		if($(answerTwo).text().indexOf('•br•') >= 0) {
+			var res = answerTwo.innerHTML.replace(/•br•/g, "<br>");
 			answerTwo.innerHTML = res;
 		}
-		if($(answerTwo).text().indexOf('ULO') >= 0) {
-			var res = answerTwo.innerHTML.replace(/ULO/g, "<ul>");
+		if($(answerTwo).text().indexOf('•ul•') >= 0) {
+			var res = answerTwo.innerHTML.replace(/•ul•/g, "<ul>");
 			answerTwo.innerHTML = res;
 		}
-		if($(answerTwo).text().indexOf('ULC') >= 0) {
-			var res = answerTwo.innerHTML.replace(/ULC/g, "</ul>");
-			answerTwo.innerHTML = res;
-		}
-		if($(answerTwo).text().indexOf('LIO') >= 0) {
-			var res = answerTwo.innerHTML.replace(/LIO/g, "<li>");
-			answerTwo.innerHTML = res;
-		}
-		if($(answerTwo).text().indexOf('LIC') >= 0) {
-			var res = answerTwo.innerHTML.replace(/LIC/g, "</li>");
+		if($(answerTwo).text().indexOf('•li•') >= 0) {
+			var res = answerTwo.innerHTML.replace(/•li•/g, "<li>");
 			answerTwo.innerHTML = res;
 		}
 		if($(answerTwo).text().indexOf('Note:') >= 0) {
 			var res = answerTwo.innerHTML.replace(/Note:/g, "<b>Note:</b>");
 			answerTwo.innerHTML = res;
 		}
+
 		counter++;
 	}
 };
@@ -430,12 +650,20 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 $.when.apply(null, _deferreds).done(function() { //executes code after the response
 	_faq = new _FAQ('<div>');
 	$('body').append(_faq.el);
-	_faq.addSection("Neighborhood FAQs", 'Neighborhood', 'neighborhood', 'neighborhood-entry', 'panel1a');
-	_faq.addSection("Elevation FAQs", 'Elevation', 'elevation', 'elevation-entry', 'panel1b');
-	_faq.addSection("Floorplan FAQs", 'Floorplan', 'floorplan', 'floorplan-entry', 'panel1c');
-	_faq.addSection("Color Tool FAQs", 'Colortool', 'colortool', 'colortool-entry', 'panel1d');
-	_faq.addSection("Site Plan FAQs", 'Siteplan', 'siteplan', 'siteplan-entry', 'panel1e');
-	_faq.addSection("Color Schemes FAQs", 'Colorschemes', 'colorschemes', 'colorschemes-entry', 'panel1f');
+	_faq.addSection("General FAQs", 'General', 'general', 'general-entry', 'panel1a');
+	_faq.addSection2("General FAQs", 'General', 'general', 'general-entry', 'panel1a');
+	_faq.addSection("Neighborhood FAQs", 'Neighborhood', 'neighborhood', 'neighborhood-entry', 'panel1b');
+	_faq.addSection2("Neighborhood FAQs", 'Neighborhood', 'neighborhood', 'neighborhood-entry', 'panel1b');
+	_faq.addSection("Elevation FAQs", 'Elevation', 'elevation', 'elevation-entry', 'panel1c');
+	_faq.addSection2("Elevation FAQs", 'Elevation', 'elevation', 'elevation-entry', 'panel1c');
+	_faq.addSection("Floorplan FAQs", 'Floorplan', 'floorplan', 'floorplan-entry', 'panel1d');
+	_faq.addSection2("Floorplan FAQs", 'Floorplan', 'floorplan', 'floorplan-entry', 'panel1d');
+	_faq.addSection("Color Tool FAQs", 'Colortool', 'colortool', 'colortool-entry', 'panel1e');
+	_faq.addSection2("Color Tool FAQs", 'Colortool', 'colortool', 'colortool-entry', 'panel1e');
+	_faq.addSection("Site Plan FAQs", 'Siteplan', 'siteplan', 'siteplan-entry', 'panel1f');
+	_faq.addSection2("Site Plan FAQs", 'Siteplan', 'siteplan', 'siteplan-entry', 'panel1f');
+	_faq.addSection("Color Schemes FAQs", 'Colorschemes', 'colorschemes', 'colorschemes-entry', 'panel1g');
+	_faq.addSection2("Color Schemes FAQs", 'Colorschemes', 'colorschemes', 'colorschemes-entry', 'panel1g');
 });
 
 /////////////////////////////////////////////////////////////////

@@ -3,58 +3,111 @@
 ////////////////////////////////////////////////////////////////////
 
 ////////////////////////STICKY NAVIGATION//////////////////////////
-
 var nav = $('.nav');
-var header = $('.headerImg');
+var subheader = $('.body');
 $(window).scroll(function() {
 	if ($(this).scrollTop() > 55) {
 		nav.addClass("sticky");
-		header.addClass("stickyHeader");
+		subheader.addClass("stickyHeader");
 	} 
 	else {
 		nav.removeClass("sticky");
-		header.removeClass("stickyHeader");
+		subheader.removeClass("stickyHeader");
 	}
 });
 
+////////////////////////CONTACT FORM HANDELER///////////////////////
+
+$('.textarea').blur(function() {
+	if(!$('.textarea')[0].checkValidity()) {
+		$('.text-field').addClass('error');
+	} 
+	else {
+		$('.text-field').removeClass('error');
+	}
+});
+var validateInput = function(i, field) {
+ 	$('.input').blur(function() {
+		if(!$('.input')[i].checkValidity()) {
+			$(field).addClass('error');
+		} 
+		else {
+			$(field).removeClass('error');
+		}
+	});
+}
+validateInput(0, '.firstname-field');
+validateInput(1, '.lastname-field');
+validateInput(2, '.company-field');
+validateInput(3, '.tel-field');
+validateInput(4, '.email-field');
+validateInput(5, '.spam-field');
+
+
+////////////////////////ACCORDION CLICK HANDLER//////////////////////////
 $('body').off();
 
 $('body').on(
-	'click', '.neighborhood-entry', function(evt) {
+	'click', '.formButton', function(evt) {
+		var html = $("html");
+		$('#formModal').addClass("scroll");
+		var open = $('#formModal.scroll');
+		if(open.length > 0) {
+			html.css({
+				'overflow': 'hidden'
+			});
+		}
+		else {
+			html.css({
+				'overflow': 'visible'
+			});
+		}
+	}
+);
+
+$('body').on(
+	'click', '.general-entry', function(evt) {
 		evt.preventDefault();
 		evt.stopImmediatePropagation();
 		var dataId = parseInt($(this).attr('data-id'), 10);
 		if(!$(this).hasClass("active")) {
+			var activeGeneral = $('.general-entry.active');
+			if(activeGeneral.length > 0) {
+				var activeDataId = activeGeneral.attr('data-id');
+				$('#panel1a' + activeDataId).hide();
+			}
 			var activeNeighborhood = $('.neighborhood-entry.active');
 			if(activeNeighborhood.length > 0) {
 				var activeDataId = activeNeighborhood.attr('data-id');
-				$('#panel1a' + activeDataId).hide();
+				$('#panel1b' + activeDataId).hide();
 			}
 			var activeElevation = $('.elevation-entry.active');
 			if(activeElevation.length > 0) {
 				var activeDataId = activeElevation.attr('data-id');
-				$('#panel1b' + activeDataId).hide();
+				$('#panel1c' + activeDataId).hide();
 			}
 			var activeFloorplan = $('.floorplan-entry.active');
 			if(activeFloorplan.length > 0) {
 				var activeDataId = activeFloorplan.attr('data-id');
-				$('#panel1c' + activeDataId).hide();
-			}
-			var activeFloorplan = $('.colortool-entry.active');
-			if(activeFloorplan.length > 0) {
-				var activeDataId = activeFloorplan.attr('data-id');
 				$('#panel1d' + activeDataId).hide();
 			}
-			var activeFloorplan = $('.siteplan-entry.active');
-			if(activeFloorplan.length > 0) {
-				var activeDataId = activeFloorplan.attr('data-id');
+			var activeColortool= $('.colortool-entry.active');
+			if(activeColortool.length > 0) {
+				var activeDataId = activeColortool.attr('data-id');
 				$('#panel1e' + activeDataId).hide();
 			}
-			var activeFloorplan = $('.colorschemes-entry.active');
-			if(activeFloorplan.length > 0) {
-				var activeDataId = activeFloorplan.attr('data-id');
+			var activeSiteplan = $('.siteplan-entry.active');
+			if(activeSiteplan.length > 0) {
+				var activeDataId = activeSiteplan.attr('data-id');
 				$('#panel1f' + activeDataId).hide();
 			}
+			var activeColorschemes = $('.colorschemes-entry.active');
+			if(activeColorschemes.length > 0) {
+				var activeDataId = activeColorschemes.attr('data-id');
+				$('#panel1g' + activeDataId).hide();
+			}
+
+			$('.general-entry').removeClass('active outline');
 			$('.neighborhood-entry').removeClass('active outline');
 			$('.elevation-entry').removeClass('active outline');
 			$('.floorplan-entry').removeClass('active outline');
@@ -70,43 +123,50 @@ $('body').on(
 	}
 );
 $('body').on(
-	'click', '.elevation-entry', function(evt) {
+	'click', '.neighborhood-entry', function(evt) {
 		evt.preventDefault();
 		evt.stopImmediatePropagation();
 		var dataId = parseInt($(this).attr('data-id'), 10);
 		if(!$(this).hasClass("active")) {
-			var activeElevation = $('.elevation-entry.active');
-			if(activeElevation.length > 0) {
-				var activeDataId = activeElevation.attr('data-id');
-				$('#panel1b' + activeDataId).hide();
+			var activeGeneral = $('.general-entry.active');
+			if(activeGeneral.length > 0) {
+				var activeDataId = activeGeneral.attr('data-id');
+				$('#panel1a' + activeDataId).hide();
 			}
 			var activeNeighborhood = $('.neighborhood-entry.active');
 			if(activeNeighborhood.length > 0) {
 				var activeDataId = activeNeighborhood.attr('data-id');
-				$('#panel1a' + activeDataId).hide();
+				$('#panel1b' + activeDataId).hide();
+			}
+			var activeElevation = $('.elevation-entry.active');
+			if(activeElevation.length > 0) {
+				var activeDataId = activeElevation.attr('data-id');
+				$('#panel1c' + activeDataId).hide();
 			}
 			var activeFloorplan = $('.floorplan-entry.active');
 			if(activeFloorplan.length > 0) {
 				var activeDataId = activeFloorplan.attr('data-id');
-				$('#panel1c' + activeDataId).hide();
-			}
-			var activeFloorplan = $('.colortool-entry.active');
-			if(activeFloorplan.length > 0) {
-				var activeDataId = activeFloorplan.attr('data-id');
 				$('#panel1d' + activeDataId).hide();
 			}
-			var activeFloorplan = $('.siteplan-entry.active');
-			if(activeFloorplan.length > 0) {
-				var activeDataId = activeFloorplan.attr('data-id');
+			var activeColortool= $('.colortool-entry.active');
+			if(activeColortool.length > 0) {
+				var activeDataId = activeColortool.attr('data-id');
 				$('#panel1e' + activeDataId).hide();
 			}
-			var activeFloorplan = $('.colorschemes-entry.active');
-			if(activeFloorplan.length > 0) {
-				var activeDataId = activeFloorplan.attr('data-id');
+			var activeSiteplan = $('.siteplan-entry.active');
+			if(activeSiteplan.length > 0) {
+				var activeDataId = activeSiteplan.attr('data-id');
 				$('#panel1f' + activeDataId).hide();
 			}
-			$('.elevation-entry').removeClass('active outline');
+			var activeColorschemes = $('.colorschemes-entry.active');
+			if(activeColorschemes.length > 0) {
+				var activeDataId = activeColorschemes.attr('data-id');
+				$('#panel1g' + activeDataId).hide();
+			}
+
 			$('.neighborhood-entry').removeClass('active outline');
+			$('.general-entry').removeClass('active outline');
+			$('.elevation-entry').removeClass('active outline');
 			$('.floorplan-entry').removeClass('active outline');
 			$('.colortool-entry').removeClass('active outline');
 			$('.siteplan-entry').removeClass('active outline');
@@ -120,6 +180,62 @@ $('body').on(
 	}
 );
 $('body').on(
+	'click', '.elevation-entry', function(evt) {
+		evt.preventDefault();
+		evt.stopImmediatePropagation();
+		var dataId = parseInt($(this).attr('data-id'), 10);
+		if(!$(this).hasClass("active")) {
+			var activeElevation = $('.elevation-entry.active');
+			if(activeElevation.length > 0) {
+				var activeDataId = activeElevation.attr('data-id');
+				$('#panel1c' + activeDataId).hide();
+			}
+			var activeGeneral = $('.general-entry.active');
+			if(activeGeneral.length > 0) {
+				var activeDataId = activeGeneral.attr('data-id');
+				$('#panel1a' + activeDataId).hide();
+			}
+			var activeNeighborhood = $('.neighborhood-entry.active');
+			if(activeNeighborhood.length > 0) {
+				var activeDataId = activeNeighborhood.attr('data-id');
+				$('#panel1b' + activeDataId).hide();
+			}
+			var activeFloorplan = $('.floorplan-entry.active');
+			if(activeFloorplan.length > 0) {
+				var activeDataId = activeFloorplan.attr('data-id');
+				$('#panel1d' + activeDataId).hide();
+			}
+			var activeColortool= $('.colortool-entry.active');
+			if(activeColortool.length > 0) {
+				var activeDataId = activeColortool.attr('data-id');
+				$('#panel1e' + activeDataId).hide();
+			}
+			var activeSiteplan = $('.siteplan-entry.active');
+			if(activeSiteplan.length > 0) {
+				var activeDataId = activeSiteplan.attr('data-id');
+				$('#panel1f' + activeDataId).hide();
+			}
+			var activeColorschemes = $('.colorschemes-entry.active');
+			if(activeColorschemes.length > 0) {
+				var activeDataId = activeColorschemes.attr('data-id');
+				$('#panel1g' + activeDataId).hide();
+			}
+			$('.elevation-entry').removeClass('active outline');
+			$('.general-entry').removeClass('active outline');
+			$('.neighborhood-entry').removeClass('active outline');
+			$('.floorplan-entry').removeClass('active outline');
+			$('.colortool-entry').removeClass('active outline');
+			$('.siteplan-entry').removeClass('active outline');
+			$('.colorschemes-entry').removeClass('active outline');
+			$(this).addClass('active outline');
+			$('#panel1c' + dataId).show();
+		} else {
+			$('#panel1c' + dataId).hide();
+			$(this).removeClass('active outline');
+		}
+	}
+);
+$('body').on(
 	'click', '.floorplan-entry', function(evt) {
 		evt.preventDefault();
 		evt.stopImmediatePropagation();
@@ -128,43 +244,49 @@ $('body').on(
 			var activeFloorplan = $('.floorplan-entry.active');
 			if(activeFloorplan.length > 0) {
 				var activeDataId = activeFloorplan.attr('data-id');
-				$('#panel1c' + activeDataId).hide();
+				$('#panel1d' + activeDataId).hide();
+			}
+			var activeGeneral = $('.general-entry.active');
+			if(activeGeneral.length > 0) {
+				var activeDataId = activeGeneral.attr('data-id');
+				$('#panel1a' + activeDataId).hide();
 			}
 			var activeNeighborhood = $('.neighborhood-entry.active');
 			if(activeNeighborhood.length > 0) {
 				var activeDataId = activeNeighborhood.attr('data-id');
-				$('#panel1a' + activeDataId).hide();
+				$('#panel1b' + activeDataId).hide();
 			}
 			var activeElevation = $('.elevation-entry.active');
 			if(activeElevation.length > 0) {
 				var activeDataId = activeElevation.attr('data-id');
-				$('#panel1b' + activeDataId).hide();
+				$('#panel1c' + activeDataId).hide();
 			}
 			var activeColortool= $('.colortool-entry.active');
 			if(activeColortool.length > 0) {
 				var activeDataId = activeColortool.attr('data-id');
-				$('#panel1d' + activeDataId).hide();
+				$('#panel1e' + activeDataId).hide();
 			}
 			var activeSiteplan = $('.siteplan-entry.active');
 			if(activeSiteplan.length > 0) {
 				var activeDataId = activeSiteplan.attr('data-id');
-				$('#panel1e' + activeDataId).hide();
+				$('#panel1f' + activeDataId).hide();
 			}
 			var activeColorschemes = $('.colorschemes-entry.active');
 			if(activeColorschemes.length > 0) {
 				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1f' + activeDataId).hide();
+				$('#panel1g' + activeDataId).hide();
 			}
 			$('.floorplan-entry').removeClass('active outline');
+			$('.general-entry').removeClass('active outline');
 			$('.neighborhood-entry').removeClass('active outline');
 			$('.elevation-entry').removeClass('active outline');
 			$('.colortool-entry').removeClass('active outline');
 			$('.siteplan-entry').removeClass('active outline');
 			$('.colorschemes-entry').removeClass('active outline');
 			$(this).addClass('active outline');
-			$('#panel1c' + dataId).show();
+			$('#panel1d' + dataId).show();
 		} else {
-			$('#panel1c' + dataId).hide();
+			$('#panel1d' + dataId).hide();
 			$(this).removeClass('active outline');
 		}
 	}
@@ -178,43 +300,49 @@ $('body').on(
 			var activeColortool= $('.colortool-entry.active');
 			if(activeColortool.length > 0) {
 				var activeDataId = activeColortool.attr('data-id');
-				$('#panel1d' + activeDataId).hide();
+				$('#panel1e' + activeDataId).hide();
+			}
+			var activeGeneral = $('.general-entry.active');
+			if(activeGeneral.length > 0) {
+				var activeDataId = activeGeneral.attr('data-id');
+				$('#panel1a' + activeDataId).hide();
 			}
 			var activeNeighborhood = $('.neighborhood-entry.active');
 			if(activeNeighborhood.length > 0) {
 				var activeDataId = activeNeighborhood.attr('data-id');
-				$('#panel1a' + activeDataId).hide();
+				$('#panel1b' + activeDataId).hide();
 			}
 			var activeElevation = $('.elevation-entry.active');
 			if(activeElevation.length > 0) {
 				var activeDataId = activeElevation.attr('data-id');
-				$('#panel1b' + activeDataId).hide();
+				$('#panel1c' + activeDataId).hide();
 			}
 			var activeFloorplan = $('.floorplan-entry.active');
 			if(activeFloorplan.length > 0) {
 				var activeDataId = activeFloorplan.attr('data-id');
-				$('#panel1c' + activeDataId).hide();
+				$('#panel1d' + activeDataId).hide();
 			}
 			var activeSiteplan = $('.siteplan-entry.active');
 			if(activeSiteplan.length > 0) {
 				var activeDataId = activeSiteplan.attr('data-id');
-				$('#panel1e' + activeDataId).hide();
+				$('#panel1f' + activeDataId).hide();
 			}
 			var activeColorschemes = $('.colorschemes-entry.active');
 			if(activeColorschemes.length > 0) {
 				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1f' + activeDataId).hide();
+				$('#panel1g' + activeDataId).hide();
 			}
 			$('.colortool-entry').removeClass('active outline');
+			$('.general-entry').removeClass('active outline');
 			$('.neighborhood-entry').removeClass('active outline');
 			$('.elevation-entry').removeClass('active outline');
 			$('.floorplan-entry').removeClass('active outline');
 			$('.siteplan-entry').removeClass('active outline');
 			$('.colorschemes-entry').removeClass('active outline');
 			$(this).addClass('active outline');
-			$('#panel1d' + dataId).show();
+			$('#panel1e' + dataId).show();
 		} else {
-			$('#panel1d' + dataId).hide();
+			$('#panel1e' + dataId).hide();
 			$(this).removeClass('active outline');
 		}
 	}
@@ -228,43 +356,49 @@ $('body').on(
 			var activeSiteplan = $('.siteplan-entry.active');
 			if(activeSiteplan.length > 0) {
 				var activeDataId = activeSiteplan.attr('data-id');
-				$('#panel1e' + activeDataId).hide();
+				$('#panel1f' + activeDataId).hide();
+			}
+			var activeGeneral = $('.general-entry.active');
+			if(activeGeneral.length > 0) {
+				var activeDataId = activeGeneral.attr('data-id');
+				$('#panel1a' + activeDataId).hide();
 			}
 			var activeNeighborhood = $('.neighborhood-entry.active');
 			if(activeNeighborhood.length > 0) {
 				var activeDataId = activeNeighborhood.attr('data-id');
-				$('#panel1a' + activeDataId).hide();
+				$('#panel1b' + activeDataId).hide();
 			}
 			var activeElevation = $('.elevation-entry.active');
 			if(activeElevation.length > 0) {
 				var activeDataId = activeElevation.attr('data-id');
-				$('#panel1b' + activeDataId).hide();
+				$('#panel1c' + activeDataId).hide();
 			}
 			var activeFloorplan = $('.floorplan-entry.active');
 			if(activeFloorplan.length > 0) {
 				var activeDataId = activeFloorplan.attr('data-id');
-				$('#panel1c' + activeDataId).hide();
+				$('#panel1d' + activeDataId).hide();
 			}
 			var activeColortool= $('.colortool-entry.active');
 			if(activeColortool.length > 0) {
 				var activeDataId = activeColortool.attr('data-id');
-				$('#panel1d' + activeDataId).hide();
+				$('#panel1e' + activeDataId).hide();
 			}
 			var activeColorschemes = $('.colorschemes-entry.active');
 			if(activeColorschemes.length > 0) {
 				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1f' + activeDataId).hide();
+				$('#panel1g' + activeDataId).hide();
 			}
 			$('.siteplan-entry').removeClass('active outline');
+			$('.general-entry').removeClass('active outline');
 			$('.neighborhood-entry').removeClass('active outline');
 			$('.elevation-entry').removeClass('active outline');
 			$('.floorplan-entry').removeClass('active outline');
 			$('.colortool-entry').removeClass('active outline');
 			$('.colorschemes-entry').removeClass('active outline');
 			$(this).addClass('active outline');
-			$('#panel1e' + dataId).show();
+			$('#panel1f' + dataId).show();
 		} else {
-			$('#panel1e' + dataId).hide();
+			$('#panel1f' + dataId).hide();
 			$(this).removeClass('active outline');
 		}
 	}
@@ -278,43 +412,49 @@ $('body').on(
 			var activeColorschemes = $('.colorschemes-entry.active');
 			if(activeColorschemes.length > 0) {
 				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1f' + activeDataId).hide();
+				$('#panel1g' + activeDataId).hide();
+			}
+			var activeGeneral = $('.general-entry.active');
+			if(activeGeneral.length > 0) {
+				var activeDataId = activeGeneral.attr('data-id');
+				$('#panel1a' + activeDataId).hide();
 			}
 			var activeNeighborhood = $('.neighborhood-entry.active');
 			if(activeNeighborhood.length > 0) {
 				var activeDataId = activeNeighborhood.attr('data-id');
-				$('#panel1a' + activeDataId).hide();
+				$('#panel1b' + activeDataId).hide();
 			}
 			var activeElevation = $('.elevation-entry.active');
 			if(activeElevation.length > 0) {
 				var activeDataId = activeElevation.attr('data-id');
-				$('#panel1b' + activeDataId).hide();
-			}
-			var activeFloorplan = $('.floorplan-entry.active');
-			if(activeFloorplan.length > 0) {
-				var activeDataId = activeFloorplan.attr('data-id');
 				$('#panel1c' + activeDataId).hide();
 			}
 			var activeFloorplan = $('.floorplan-entry.active');
 			if(activeFloorplan.length > 0) {
 				var activeDataId = activeFloorplan.attr('data-id');
-				$('#panel1c' + activeDataId).hide();
+				$('#panel1d' + activeDataId).hide();
+			}
+			var activeColortool= $('.colortool-entry.active');
+			if(activeColortool.length > 0) {
+				var activeDataId = activeColortool.attr('data-id');
+				$('#panel1e' + activeDataId).hide();
 			}
 			var activeSiteplan = $('.siteplan-entry.active');
 			if(activeSiteplan.length > 0) {
 				var activeDataId = activeSiteplan.attr('data-id');
-				$('#panel1e' + activeDataId).hide();
+				$('#panel1f' + activeDataId).hide();
 			}
 			$('.colorschemes-entry').removeClass('active outline');
+			$('.general-entry').removeClass('active outline');
 			$('.neighborhood-entry').removeClass('active outline');
 			$('.elevation-entry').removeClass('active outline');
 			$('.floorplan-entry').removeClass('active outline');
 			$('.colortool-entry').removeClass('active outline');
 			$('.siteplan-entry').removeClass('active outline');
 			$(this).addClass('active outline');
-			$('#panel1f' + dataId).show();
+			$('#panel1g' + dataId).show();
 		} else {
-			$('#panel1f' + dataId).hide();
+			$('#panel1g' + dataId).hide();
 			$(this).removeClass('active outline');
 		}
 	}

@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+	<div class="wrapper">
 	<div class="header">
 		<div class="topDiv">
 			<a href="http://www.renderinghouse.com/" target="_blank">
@@ -31,7 +32,11 @@
 				</nav>
 				<aside class="left-off-canvas-menu">
 					<ul class="off-canvas-list">
-						<div class="icon-bar vertical six-up">
+						<div class="icon-bar vertical seven-up">
+							<a href="general.html" class="item border">
+								<img src="images/cog2.png"></img>
+								<label id="itemlabel1">General</label>
+							</a>
 							<a href="neighborhood.html" class="item border">
 								<img src="images/neighborhoodW.png"></img>
 								<label id="itemlabel1">Neighborhood</label>
@@ -48,7 +53,7 @@
 								<img src="images/colortool.png"></img>
 								<label id="itemlabel4">Color Tool</label>
 							</a>
-							<a href="siteplan.html" class="item border">
+							<a href="siteplan.html" class="item border" style="background-color:#7bb9c5;">
 								<img src="images/siteplanW.png"></img>
 								<label id="itemlabel5">Site Plan</label>
 							</a>
@@ -59,53 +64,46 @@
 						</div>
 					</ul>
 				</aside>
-				<section class="main-section">
-	      			<div class="headerImg headerImg1">
-						<h1>Frequently Asked Questions<h1>
-						<a href="http://www.renderinghouse.com/dashboard/" 
-						target="_blank" class="headerButton button medium radius">
-						OPEN DASHBOARD</a>
-					</div>
-	   			 </section>
+				<section class="main-section"></section>
 				<a class="exit-off-canvas"></a>
 			</div>
 		</div>
-		<div class="navDiv nav icon-bar six-up" role="navigation">
-			<a href="neighborhood.html" class="item" aria-labelledby="#itemlabel1" 
+		<div class="navDiv nav icon-bar seven-up" role="navigation">
+			<a href="general.html" class="item" aria-labelledby="#itemlabel1" 
+			role="button" tabindex="0">
+				<img src="images/cog2.png"></img>
+				<label id="itemlabel1">General</label>
+			</a>
+			<a href="neighborhood.html" class="item" aria-labelledby="#itemlabel2" 
 			role="button" tabindex="0">
 				<img src="images/neighborhoodW.png"></img>
-				<label id="itemlabel1">Neighborhood</label>
+				<label id="itemlabel2">Neighborhood</label>
 			</a>
-			<a href="elevation.html" class="item" aria-labelledby="#itemlabel2" 
+			<a href="elevation.html" class="item" aria-labelledby="#itemlabel3" 
 			role="button" tabindex="0">
 				<img src="images/elevationW.png"></img>
-				<label id="itemlabel2">Elevation</label>
+				<label id="itemlabel3">Elevation</label>
 			</a>
-			<a href="floorplan.html" class="item" aria-labelledby="#itemlabel3" 
+			<a href="floorplan.html" class="item" aria-labelledby="#itemlabel4" 
 			role="button" tabindex="0">
 				<img src="images/floorplanW.png"></img>
-				<label id="itemlabel3">Floorplan</label>
+				<label id="itemlabel4">Floorplan</label>
 			</a>
-			<a href="colortool.html" class="item" aria-labelledby="#itemlabel4" 
+			<a href="colortool.html" class="item" aria-labelledby="#itemlabel5" 
 			role="button" tabindex="0">
 				<img src="images/colortool.png"></img>
-				<label id="itemlabel4">Color Tool</label>
+				<label id="itemlabel5">Color Tool</label>
 			</a>
-			<a href="siteplan.html" class="item" aria-labelledby="#itemlabel5" 
-			role="button" tabindex="0">
+			<a href="siteplan.html" class="item" aria-labelledby="#itemlabel6" 
+			role="button" tabindex="0" style="background-color:#7bb9c5;">
 				<img src="images/siteplanW.png"></img>
-				<label id="itemlabel5">Site Plan</label>
+				<label id="itemlabel6">Site Plan</label>
 			</a>
-			<a href="colorschemes.html" class="item" aria-labelledby="#itemlabel6" 
+			<a href="colorschemes.html" class="item" aria-labelledby="#itemlabel7" 
 			role="button" tabindex="0">
 				<img src="images/colorschemes1.png"></img>
-				<label id="itemlabel6">Color Schemes</label>
+				<label id="itemlabel7">Color Schemes</label>
 			</a>
-		</div>
-		<div class="headerImg headerImg2">
-			<h1>Frequently Asked Questions<h1>
-			<a href="http://www.renderinghouse.com/dashboard/" target="_blank" 
-			class="headerButton button medium radius">OPEN DASHBOARD</a>
 		</div>
 	</div>
 	<!--BODY-->
@@ -114,6 +112,8 @@
 			display: block;
 		}
 	</style>
+	<div class="push"></div>
+	</div>
 	<div class="footer">
 		<div class="contact">
 			<h3>Contact Us!</h3>
@@ -132,32 +132,44 @@
 					</div>
 				</div>
 				<div class="button2 formFooterDiv">
-					<a href="#" data-reveal-id="formModal" class="reveal footerButton 
+					<a href="#" data-reveal-id="formModal" class="formButton reveal footerButton 
 					button tiny radius">CONTACT FORM</a>
 				</div>
 				<div data-reveal id="formModal" class="reveal-modal large" 
 				aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 					<form data-abide name="myForm" id="contactForm" method="post" action="php/form.php">
 						<div class="row">
-							<div class="large-12 columns name-field">
-								<label>Name <small>required</small>
-									<input name="name" class="input" type="text" placeholder="Name..."/ required>
+							<div class="large-6 columns name-field">
+								<label>First name <small>required</small>
+									<input name="firstName" class="input" type="text" placeholder="First name"/ required>
 								</label>
-								<small class="error">Name is required and must be a string.</small>
+								<small class="error">First name is required and must be a string.</small>
+							</div>
+							<div class="large-6 columns name-field">
+								<label>Last name <small>required</small>
+									<input name="lastName" class="input" type="text" placeholder="Last name"/ required>
+								</label>
+								<small class="error">Last name is required and must be a string.</small>
 							</div>
 						</div>
 						<div class="row">
-							<div class="large-12 columns tel-field">
+							<div class="large-12 columns company-field">
+								<label>Company <small>required</small>
+									<input name="company" class="input" type="text" placeholder="Company" required/>
+								</label>
+								<small class="error">Company name is required and must be a string. Please input "none" if inapplicable.</small>
+							</div>
+						</div>
+						<div class="row">
+							<div class="large-6 columns tel-field">
 								<label>Phone <small>required</small>
-									<input name="phone" class="input" type="tel" placeholder="Phone..." required/>
+									<input name="phone" class="input" type="tel" placeholder="Phone" required/>
 								</label>
 								<small class="error">Phone is required and must be a number.</small>
 							</div>
-						</div>
-						<div class="row">
-							<div class="large-12 columns email-field">
+							<div class="large-6 columns email-field">
 								<label>Email <small>required</small>
-									<input name="email" class="input" type="email" placeholder="Email..."/ required>
+									<input name="email" class="input" type="email" placeholder="Email"/ required>
 								</label>
 								<small class="error">A valid email address is required.</small>
 							</div>
@@ -165,7 +177,7 @@
 						<div class="row">
 							<div class="large-12 columns text-field">
 								<label>Message <small>required</small>
-									<textarea name="message" placeholder="Message..." required></textarea>
+									<textarea name="message" placeholder="Message" required></textarea>
 								</label>
 								<small class="error">A message is required.</small>
 							</div>
