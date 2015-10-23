@@ -5,6 +5,12 @@
 html, body {
     height: 100%;
 }
+p ol {
+	margin-left: 200px !important;
+}
+p ol {
+	list-style-type: square;
+}
 .wrapper {
     min-height: 100%;
     height: auto !important;
@@ -18,11 +24,17 @@ html, body {
 	background-color: #EFEFEF;
 }
 .scroll {
-	overflow-y: auto;
+	overflow-y: scroll;
+}
+.hidden {
+	overflow: hidden;
 }
 .item7 {
 	padding-left: 0px;
 	padding-right: 0px;
+}
+#formModal {
+	bottom: 0px;	
 }
 #General {
 	display: none;
@@ -45,20 +57,37 @@ html, body {
 #Colorschemes {
 	display: none;
 }
+.container {
+	float: left;
+	height: auto;
+	max-width: 180px;
+	width: auto;
+	margin-right: 20px;
+	margin-bottom: 0px;
+}
 .flex-video {
 	margin-bottom: 0px;
 }
 .reveal-modal {
 	padding: 50px;
 	min-height: 0px;
-	/*top: 0px !important;*/
+	top: 0px !important;
 	position: fixed;
+	width: 100%;
 	max-height: 710px;
-	max-width: 660px !important;
 }
-.modalImg {
+.imgModal {
+	max-width: 695px !important;
+}
+.videoModal {
+	max-width: 1000px !important;
+	max-height: 560px !important;
+}
+.modalImg, #formModal {
 	max-height: 598.5px;
-	/*598.5px*/
+}
+.video {
+	max-height: 460px;
 }
 .buttonDiv .contentDiv {
 	width: 230px !important;
@@ -100,7 +129,6 @@ html, body {
 }
 .left-off-canvas-menu {
 	width: 150px;
-	/*background-color: #52a4da;*/
 }
 .icon-bar {
 	background-color: #52a4da;
@@ -319,11 +347,26 @@ background: #7bb9c5;
 
 /**********************SMALL SCREEN*****************************/
 @media screen and (max-width: 450px) {
+	p ul {
+		margin-left: 1.25rem !important;
+	}
+	p ol {
+		margin-left: 1.25rem !important;
+	}
 	.reveal-modal {
 		padding: 10px;
 		padding-top: 20px;
 		padding-bottom: 20px;
 		min-height: 0px;
+	}
+	.revealDiv {
+		width: auto !important;
+	}
+	.container {
+		min-height: 100px;
+		width: 100%;
+		max-width: 350px !important;
+		float: none;
 	}
 	#myModal, #videoModal {
 		position: fixed;
@@ -331,12 +374,8 @@ background: #7bb9c5;
 		max-width: 660px !important;
 		top: 0px !important;
 	}
-	#formModal {
-		position: absolute;
-	}
 	.modalImg {
 		max-height: 598.5px;
-		/*598.5px*/
 	}
 	.close-reveal-modal {
 		top: 0px !important;
@@ -397,7 +436,7 @@ background: #7bb9c5;
 		width: 50%;
 		float: right;
 		max-width: 100px;
-		margin-top: 30px;
+		margin-top: 15px;
 	}
 	.video_image_p .revealDiv {
 		max-width: 350px;
@@ -408,12 +447,13 @@ background: #7bb9c5;
 		width: 50%;
 		max-width: 100px;
 		margin-bottom: 10px;
+		margin-right: 10px;
 	}
 	.image_p .revealImg {
 		width: 50%;
 		max-width: 100px;
 		float: left;
-		margin-right: 20px;
+		margin-right: 10px;
 		margin-bottom: 0px;
 	}
 	.qContent p {
@@ -428,7 +468,7 @@ background: #7bb9c5;
 	.buttonDiv {
 		min-width: 100%;
 		max-width: 500px;
-		padding-left: 5px;
+		padding-left: 3%;
 	}
 	.button1 {
 		float: left; 
@@ -476,9 +516,6 @@ background: #7bb9c5;
 
 /*********************SMALL-MEDIUM SCREEN***********************/
 @media screen and (min-width: 451px) and (max-width: 770px) {
-	.reveal-modal {
-		top: 0px !important;
-	}
 	.stickyHeader {
 		margin-top: 0px !important;
 	}
@@ -527,11 +564,10 @@ background: #7bb9c5;
 	  display: none;
 	}
 	.revealImg {
-		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 		margin-bottom: 0px;
-	}
-	.video_image_p .videoButton {
-		margin-top: 10px;
+		margin-right: 10px;
+		width: 75px !important;
+		height: 75px !important;
 	}
 	.revealDiv a {
 		border: none;
@@ -542,14 +578,16 @@ background: #7bb9c5;
 	}
 	.revealDiv {
 		height: auto;
-		width: 100px;
-		margin-right: 20px;
-		float: left;
+		/*width: 100px;*/
+		width: 100% !important;
 		padding-top: 10px;
 		margin-bottom: 0px;
 	}
 	.revealImg:hover {
 		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+	}
+	.videoButton {
+		margin-right: 10px;
 	}
 	.button1 {
 		float: left; 
@@ -558,7 +596,7 @@ background: #7bb9c5;
 		float: left;
 	}
 	.button3 {
-		float:left;
+		float: left;
 	}
 	.button1 .button {
 		width: 100px;
@@ -579,10 +617,7 @@ background: #7bb9c5;
 
 /***************MEDIUM SCREEN*******************/
 @media screen and (min-width: 771px) and (max-width: 860px) {
-	.reveal-modal {
-		top: 0px !important;
-	}
-	.accordion-navigation a {
+	.accordion-navigation {
 		border-top: 1px solid #ddd;
 	}
 	.accordionDiv {
@@ -614,14 +649,15 @@ background: #7bb9c5;
 	}
 	.revealDiv {
 		height: auto;
-		width: 100px;
-		margin-right: 20px;
-		float: left;
+		width: 100% !important;
 		padding-top: 10px;
 		margin-bottom: 0px;
 	}
 	.revealImg:hover {
 		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+	}
+	.revealImg {
+		margin-right: 10px;
 	}
 	.contactDiv {
 		width: 100%;
@@ -635,9 +671,6 @@ background: #7bb9c5;
 }
 /***************LARGE SCREEN*******************/
 @media screen and (min-width: 861px) {
-	.reveal-modal {
-		top: 0px !important;
-	}
 	.paddingI {
 		padding-top: 16px;
 		padding-left: 16px;
@@ -663,14 +696,15 @@ background: #7bb9c5;
 	}
 	.revealDiv {
 		height: auto;
-		width: 100px;
-		margin-right: 20px;
-		float: left;
+		width: 100% !important;
 		padding-top: 10px;
 		margin-bottom: 0px;
 	}
 	.revealImg:hover {
 		box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+	}
+	.revealImg {
+		margin-right: 10px;
 	}
 	.buttonDiv .contentDiv {
 		width: 230px;
