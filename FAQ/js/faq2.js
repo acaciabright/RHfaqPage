@@ -7,7 +7,21 @@ function _Section(data) {
 	this.answer = data.prop('answer');
 	this.screenShot = data.prop('screenShot');
 	this.videoURL = data.prop('videoURL');
+	this.videoURL2 = data.prop('videoURL2');
+	this.steps = [];
+
+	var stepsArray = data.prop('steps');
+	for(i in stepsArray) {
+		var curStep = stepsArray[i];
+		var stepObject = new _Step($(curStep));
+		this.addStep(stepObject);
+	}
 }
+
+_Section.prototype.addStep = function(object) {
+	var array = this.steps;
+	array.push(object);
+};
 _Section.prototype.get = function(prop) {
 	return this[prop];
 }
@@ -31,6 +45,17 @@ _Accordion.prototype.addObject = function(object, dest) {
 _Accordion.prototype.getObjects = function(dest) {
 	return this[dest];
 };
+
+function _Step(data) {
+	this.topicId = data.prop('topicId');
+	this.id = data.prop('id');
+	this.img = data.prop('images');
+	this.text = data.prop('text');
+	this.stepNumber = data.prop('stepNumber');
+}
+_Step.prototype.get = function(prop) {
+	return this[prop];
+}
 
 /////////////////////////////////////////////////////////////////
 ////////////////////DATA REQUEST SECTION/////////////////////////
@@ -63,7 +88,7 @@ generalRequest.done(function(data) {
 		console.log('Failed somehow' + data);
 	} else {
 		var split = data.split("^S^P^L^I^T^");
-		_colorschemesArray = $.parseJSON(split[1]); 
+		_generalArray = $.parseJSON(split[1]); 
 		for(i in _generalArray) {
 			var curAccordion = _generalArray[i];
 			var generalObject = new _Section($(curAccordion));
@@ -298,100 +323,192 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 		});
 		questionOne.append(answer);
 
-		var revealDiv = $('<div>').addClass("revealDiv revealDivTwo" + counter);
-		answer.append(revealDiv);
-		var imgModal = $('<a>').attr({
-			'href': '#',
-			'data-reveal-id': 'myModal',
-			'id': 'revealImg',
-			'class': 'reveal',
-			'style': 'outline:none'
+		var div = $('<div>').attr({
+			'id': 'container',
+			'class': 'container containerTwo' + counter
 		});
-		revealDiv.append(imgModal);
-		var revealImg = $('<img>').attr({
-			'src': data.get('screenShot'),
-			'class': 'revealImg revealImgTwo' + counter
-		});
-		if (data.get('screenShot') !== null) {
-			imgModal.append(revealImg);
-		}
-		var videoModal = $('<a>').attr({
-			'href': '#',
-			'data-reveal-id': 'videoModal',
-			'id': 'video',
-			'class': 'reveal videoButton button small radius videoButtonTwo' + counter,
-			'style': 'outline: none'
-		}).text("VIDEO");
-		if(data.get('videoURL') !== null) {
-			revealDiv.append(videoModal);
-		}
-		var imgReveal = $('<div data-reveal>').attr({
-			'id': 'myModal',
-			'class': 'reveal-modal medium',
-			'aria-labelledby': 'modalTitle',
-			'aria-hidden': 'true',
-			'role': 'dialog'
-		});
-		if (data.get('screenShot') !== null) {
-			answer.append(imgReveal);
-		}
-		var modalImg = $('<img>').attr({
-			'src': data.get('screenShot'),
-			'class': 'modalImg'
-		});
-		if(data.get('screenShot') != null) {
-			imgReveal.append(modalImg);
-		}
-		var imgClose = $('<a>').attr({
-			'class': 'close-reveal-modal',
-			'aria-label': 'close'
-		});
-		imgReveal.append(imgClose);
-		var imgX = $('<i>').addClass("fi-x");
-		imgClose.append(imgX);
+		answer.append(div);
 
-		var videoReveal = $('<div data-reveal>').attr({
-			'id': 'videoModal',
-			'class': 'reveal-modal large',
-			'aria-labelledby': 'videoModalTitle',
-			'aria-hidden': 'true',
-			'role': 'dialog'
-		});
-		if(data.get('videoURL') !== null) {
-			answer.append(videoReveal);
+		if(data.get('screenShot') !== null || data.get('videoURL') !== null) {
+			var revealDiv = $('<div>').addClass("revealDiv revealDivTwo" + counter);
+			div.append(revealDiv);
+			var imgModal = $('<a>').attr({
+				'href': '#',
+				'data-reveal-id': 'myModal' + counter,
+				'id': 'revealImg',
+				'class': 'reveal',
+				'style': 'outline:none'
+			});
+			revealDiv.append(imgModal);
+			var revealImg = $('<img>').attr({
+				'src': 'images/screenshot2.png',
+				'class': 'revealImg revealImgTwo' + counter
+			});
+			if (data.get('screenShot') !== null) {
+				imgModal.append(revealImg);
+			}
+			var videoModal = $('<a>').attr({
+				'href': '#',
+				'data-reveal-id': 'videoModal'  + counter,
+				'id': 'video',
+				'class': 'reveal videoButton button small radius videoButtonTwo' + counter,
+				'style': 'outline: none'
+			}).text("VIDEO");
+			if(data.get('videoURL') !== null) {
+				revealDiv.append(videoModal);
+			}
+			var imgReveal = $('<div data-reveal>').attr({
+				'id': 'myModal' + counter,
+				'class': 'reveal-modal imgModal xlarge',
+				'aria-labelledby': 'myModalTitle',
+				'aria-hidden': 'true',
+				'role': 'dialog'
+			});
+			if (data.get('screenShot') !== null) {
+				answer.append(imgReveal);
+			}
+			var modalImg = $('<img>').attr({
+				'src': data.get('screenShot'),
+				'class': 'modalImg'
+			});
+			if(data.get('screenShot') !== null) {
+				imgReveal.append(modalImg);
+			}
+			var imgClose = $('<a>').attr({
+				'class': 'close-reveal-modal',
+				'aria-label': 'close'
+			});
+			imgReveal.append(imgClose);
+			var imgX = $('<i>').addClass("fi-x");
+			imgClose.append(imgX);
+
+			var videoReveal = $('<div data-reveal>').attr({
+				'id': 'videoModal'  + counter,
+				'class': 'reveal-modal videoModal xlarge',
+				'aria-labelledby': 'videoModalTitle',
+				'aria-hidden': 'true',
+				'role': 'dialog'
+			});
+			if(data.get('videoURL') !== null) {
+				answer.append(videoReveal);
+			}
+			var videoDiv = $('<div>').addClass("flex-video widescreen vimeo");
+			videoReveal.append(videoDiv);
+			var video = $('<video controls allowfullscreen>').attr({
+				'width': '100%',
+				'height': '100%',
+				'src': data.get('videoURL'),
+				'class': 'video',
+				'frameborder': '0'
+			});
+			if(data.get('videoURL') !== null) {
+				videoDiv.append(video);
+			}
+			var videoClose = $('<a>').attr({
+				'class': 'close-reveal-modal',
+				'aria-label': 'close'
+			});
+			videoReveal.append(videoClose);
+			var vidX = $('<i>').addClass("fi-x");
+			videoClose.append(vidX);
 		}
-		var videoDiv = $('<div>').addClass("flex-video widescreen vimeo");
-		videoReveal.append(videoDiv);
-		var video = $('<iframe allowfullscreen>').attr({
-			'width': '560',
-			'height': '315',
-			'src': data.get('videoURL'),
-			'class': 'video',
-			'frameborder': '0'		
-		});
-		if(data.get('videoURL') !== null) {
-			videoDiv.append(video);
-		}
-		var videoClose = $('<a>').attr({
-			'class': 'close-reveal-modal',
-			'aria-label': 'close'
-		});
-		videoReveal.append(videoClose);
-		var vidX = $('<i>').addClass("fi-x");
-		videoClose.append(vidX);
 
 		var p = $('<p>').attr({
 			'id': 'answerP' + counter,
 			'class': 'answer answerTwo' + counter
 		}).text(data.get('answer'));
-		if(data.get('answer') !== null) {
+		if(data.get('answer') !== null && data.get('answer') != '') {
 			answer.append(p);
+		}
+
+		var counter2 = 1;
+		var steps = data.get('steps');
+		if(steps.length > 0 && data.get('answer') == null) {
+			var revealDiv = $('<div>').addClass("revealDiv revealDivTwo" + counter);
+			div.append(revealDiv);
+			for(i in steps) {
+				var step = steps[i];
+				var imgModal = $('<a>').attr({
+					'href': '#',
+					'data-reveal-id': 'myModal2' + counter2 + counter,
+					'id': 'revealImg',
+					'class': 'reveal',
+					'style': 'outline:none'
+				});
+				revealDiv.append(imgModal);
+				var revealImg = $('<img>').attr({
+					'src': step.get('img'),
+					'class': 'revealImg revealImgTwo' + counter
+				});
+				if(step.get('img') !== null) {
+					imgModal.append(revealImg);
+				}
+				var imgReveal = $('<div data-reveal>').attr({
+					'id': 'myModal2' + counter2 + counter,
+					'class': 'reveal-modal imgModal xlarge',
+					'aria-labelledby': 'myModalTitle',
+					'aria-hidden': 'true',
+					'role': 'dialog'
+				});
+				if (step.get('img') !== null) {
+					revealDiv.append(imgReveal);
+				}
+				var modalImg = $('<img>').attr({
+					'src': step.get('img'),
+					'class': 'modalImg'
+				});
+				if(step.get('img') !== null) {
+					imgReveal.append(modalImg);
+				}
+				var imgClose = $('<a>').attr({
+					'class': 'close-reveal-modal',
+					'aria-label': 'close'
+				});
+				imgReveal.append(imgClose);
+				var imgX = $('<i>').addClass("fi-x");
+				imgClose.append(imgX);
+
+				var p = $('<p>').attr({
+					'id': 'answerP' + counter,
+					'class': 'answer answerTwo' + counter
+				}).text(step.get('text'));
+				if(step.get('text') !== null && step.get('text') != '') {
+					answer.append(p);
+				}
+				var answerId = $('#' + (panel + counter));
+				if($('.revealDivTwo' + counter).length > 0 && $('.revealImgTwo' + counter).length > 1) {
+					$(answerId).css({
+						'width': '100%'
+					});
+					$('.revealDivTwo' + counter).css({
+						'width': '150px'
+					});
+					$('.revealImgTwo' + counter).css({
+						'height': '80px',
+						'width': '80px',
+						'margin-right': '10px !important'
+					});
+				}
+
+				counter2++;
+			}
 		}
 
 		var revealImgTwo = $('.revealImgTwo' + counter);
 		var videoButtonTwo = $('.videoButtonTwo' + counter);
 		var revealDivTwo = $('.revealDivTwo' + counter);
 		var answerId = $('#' + (panel + counter));
+		if(revealImgTwo.length > 1) {
+			$("ul").css({
+				'margin-left': '195px !important'
+			});
+		}
+		else {
+			$("ul").css({
+				'margin-left': '135px !important'
+			});
+		}
+
 		if(revealImgTwo.length && videoButtonTwo.length) {
 			revealDivTwo.show();
 			answerId.addClass("video_image_p");
@@ -436,6 +553,10 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 		}
 		if($(answerTwo).text().indexOf('•ul•') >= 0) {
 			var res = answerTwo.innerHTML.replace(/•ul•/g, "<ul>");
+			answerTwo.innerHTML = res;
+		}
+		if($(answerTwo).text().indexOf('•ol•') >= 0) {
+			var res = answerTwo.innerHTML.replace(/•ol•/g, "<ol>");
 			answerTwo.innerHTML = res;
 		}
 		if($(answerTwo).text().indexOf('•li•') >= 0) {
@@ -491,100 +612,192 @@ _FAQ.prototype.addSection2 = function(headerText, sectionId, sectionText, entryT
 		});
 		questionOne.append(answer);
 
-		var revealDiv = $('<div>').addClass("revealDiv revealDivTwo" + counter);
-		answer.append(revealDiv);
-		var imgModal = $('<a>').attr({
-			'href': '#',
-			'data-reveal-id': 'myModal',
-			'id': 'revealImg',
-			'class': 'reveal',
-			'style': 'outline:none'
+		var div = $('<div>').attr({
+			'id': 'container',
+			'class': 'container containerTwo' + counter
 		});
-		revealDiv.append(imgModal);
-		var revealImg = $('<img>').attr({
-			'src': data.get('screenShot'),
-			'class': 'revealImg revealImgTwo' + counter
-		});
-		if (data.get('screenShot') !== null) {
-			imgModal.append(revealImg);
-		}
-		var videoModal = $('<a>').attr({
-			'href': '#',
-			'data-reveal-id': 'videoModal',
-			'id': 'video',
-			'class': 'reveal videoButton button small radius videoButtonTwo' + counter,
-			'style': 'outline: none'
-		}).text("VIDEO");
-		if(data.get('videoURL') !== null) {
-			revealDiv.append(videoModal);
-		}
-		var imgReveal = $('<div data-reveal>').attr({
-			'id': 'myModal',
-			'class': 'reveal-modal medium',
-			'aria-labelledby': 'modalTitle',
-			'aria-hidden': 'true',
-			'role': 'dialog'
-		});
-		if (data.get('screenShot') !== null) {
-			answer.append(imgReveal);
-		}
-		var modalImg = $('<img>').attr({
-			'src': data.get('screenShot'),
-			'class': 'modalImg'
-		});
-		if(data.get('screenShot') != null) {
-			imgReveal.append(modalImg);
-		}
-		var imgClose = $('<a>').attr({
-			'class': 'close-reveal-modal',
-			'aria-label': 'close'
-		});
-		imgReveal.append(imgClose);
-		var imgX = $('<i>').addClass("fi-x");
-		imgClose.append(imgX);
+		answer.append(div);
 
-		var videoReveal = $('<div data-reveal>').attr({
-			'id': 'videoModal',
-			'class': 'reveal-modal large',
-			'aria-labelledby': 'videoModalTitle',
-			'aria-hidden': 'true',
-			'role': 'dialog'
-		});
-		if(data.get('videoURL') !== null) {
-			answer.append(videoReveal);
+		if(data.get('screenShot') !== null || data.get('videoURL') !== null) {
+			var revealDiv = $('<div>').addClass("revealDiv revealDivTwo" + counter);
+			div.append(revealDiv);
+			var imgModal = $('<a>').attr({
+				'href': '#',
+				'data-reveal-id': 'myModal' + counter,
+				'id': 'revealImg',
+				'class': 'reveal',
+				'style': 'outline:none'
+			});
+			revealDiv.append(imgModal);
+			var revealImg = $('<img>').attr({
+				'src': 'images/screenshot2.png',
+				'class': 'revealImg revealImgTwo' + counter
+			});
+			if(data.get('screenShot') !== null) {
+				imgModal.append(revealImg);
+			}
+			var videoModal = $('<a>').attr({
+				'href': '#',
+				'data-reveal-id': 'videoModal' + counter,
+				'id': 'video',
+				'class': 'reveal videoButton button small radius videoButtonTwo' + counter,
+				'style': 'outline: none'
+			}).text("VIDEO");
+			if(data.get('videoURL') !== null) {
+				revealDiv.append(videoModal);
+			}
+			var imgReveal = $('<div data-reveal>').attr({
+				'id': 'myModal' + counter,
+				'class': 'reveal-modal imgModal xlarge',
+				'aria-labelledby': 'myModalTitle',
+				'aria-hidden': 'true',
+				'role': 'dialog'
+			});
+			if (data.get('screenShot') !== null) {
+				revealDiv.append(imgReveal);
+			}
+			var modalImg = $('<img>').attr({
+				'src': data.get('screenShot'),
+				'class': 'modalImg'
+			});
+			if(data.get('screenShot') !== null) {
+				imgReveal.append(modalImg);
+			}
+			var imgClose = $('<a>').attr({
+				'class': 'close-reveal-modal',
+				'aria-label': 'close'
+			});
+			imgReveal.append(imgClose);
+			var imgX = $('<i>').addClass("fi-x");
+			imgClose.append(imgX);
+
+			var videoReveal = $('<div data-reveal>').attr({
+				'id': 'videoModal' + counter,
+				'class': 'reveal-modal videoModal xlarge',
+				'aria-labelledby': 'videoModalTitle',
+				'aria-hidden': 'true',
+				'role': 'dialog'
+			});
+			if(data.get('videoURL') !== null) {
+				answer.append(videoReveal);
+			}
+			/*
+			var videoDiv = $('<div>').addClass("flex-video widescreen");
+			videoReveal.append(videoDiv);
+			*/
+			var video = $('<video controls>').attr({
+				'width': '100%',
+				'height': '100%',
+				'class': 'video'
+			}).text("Your browser does not support the video.");
+			var source = $('<source>').attr({
+				'src': data.get('videoURL'),
+				'type': 'video/mp4; codecs=h.264',
+				'class': 'source1'
+			});
+			var source2 = $('<source>').attr({
+				'src': data.get('videoURL2'),
+				'type': 'video/webm',
+				'class': 'source2'
+			})
+			video.append(source);
+			video.append(source2);
+			if(data.get('videoURL') !== null) {
+				videoReveal.append(video);
+			}
+			var videoClose = $('<a>').attr({
+				'class': 'close-reveal-modal',
+				'aria-label': 'close'
+			});
+			videoReveal.append(videoClose);
+			var vidX = $('<i>').addClass("fi-x");
+			videoClose.append(vidX);
 		}
-		var videoDiv = $('<div>').addClass("flex-video widescreen vimeo");
-		videoReveal.append(videoDiv);
-		var video = $('<iframe allowfullscreen>').attr({
-			'width': '560',
-			'height': '315',
-			'src': data.get('videoURL'),
-			'class': 'video',
-			'frameborder': '0'		
-		});
-		if(data.get('videoURL') !== null) {
-			videoDiv.append(video);
-		}
-		var videoClose = $('<a>').attr({
-			'class': 'close-reveal-modal',
-			'aria-label': 'close'
-		});
-		videoReveal.append(videoClose);
-		var vidX = $('<i>').addClass("fi-x");
-		videoClose.append(vidX);
 
 		var p = $('<p>').attr({
 			'id': 'answerP' + counter,
 			'class': 'answer answerTwo' + counter
 		}).text(data.get('answer'));
-		if(data.get('answer') !== null) {
+		if(data.get('answer') !== null && data.get('answer') != '') {
 			answer.append(p);
+		}
+		var counter2 = 1;
+		var steps = data.get('steps');
+		if(steps.length > 0 && data.get('answer') == null) {
+			var revealDiv = $('<div>').addClass("screenshotDiv revealDiv revealDivTwo" + counter);
+			div.append(revealDiv);
+			for(i in steps) {
+				var step = steps[i];
+				var imgModal = $('<a>').attr({
+					'href': '#',
+					'data-reveal-id': 'myModal2' + counter2 + counter,
+					'id': 'revealImg',
+					'class': 'reveal',
+					'style': 'outline:none'
+				});
+				revealDiv.append(imgModal);
+				var revealImg = $('<img>').attr({
+					'src': step.get('img'),
+					'class': 'revealImg revealImgTwo' + counter
+				});
+				if(step.get('img') !== null) {
+					imgModal.append(revealImg);
+				}
+				var imgReveal = $('<div data-reveal>').attr({
+					'id': 'myModal2' + counter2 + counter,
+					'class': 'reveal-modal imgModal xlarge',
+					'aria-labelledby': 'myModalTitle',
+					'aria-hidden': 'true',
+					'role': 'dialog'
+				});
+				if (step.get('img') !== null) {
+					revealDiv.append(imgReveal);
+				}
+				var modalImg = $('<img>').attr({
+					'src': step.get('img'),
+					'class': 'modalImg'
+				});
+				if(step.get('img') !== null) {
+					imgReveal.append(modalImg);
+				}
+				var imgClose = $('<a>').attr({
+					'class': 'close-reveal-modal',
+					'aria-label': 'close'
+				});
+				imgReveal.append(imgClose);
+				var imgX = $('<i>').addClass("fi-x");
+				imgClose.append(imgX);
+
+				var p = $('<p>').attr({
+					'id': 'answerP' + counter,
+					'class': 'answer answerTwo' + counter
+				}).text(step.get('text'));
+				if(step.get('text') !== null && step.get('text') != '') {
+					answer.append(p);
+				}
+				var answerId = $('#' + (panel + counter));
+				if($('.revealDivTwo' + counter).length > 0 && $('.revealImgTwo' + counter).length > 1) {
+					$(answerId).css({
+						'width': '100%'
+					});
+					$('.revealDivTwo' + counter).css({
+						'width': '150px'
+					});
+					$('.revealImgTwo' + counter).css({
+						'height': '75px',
+						'width': '75px'
+					});
+				}
+
+				counter2++;
+			}
 		}
 
 		var revealImgTwo = $('.revealImgTwo' + counter);
 		var videoButtonTwo = $('.videoButtonTwo' + counter);
 		var revealDivTwo = $('.revealDivTwo' + counter);
 		var answerId = $('#' + (panel + counter));
+
 		if(revealImgTwo.length && videoButtonTwo.length) {
 			revealDivTwo.show();
 			answerId.addClass("video_image_p");
@@ -632,6 +845,10 @@ _FAQ.prototype.addSection2 = function(headerText, sectionId, sectionText, entryT
 		}
 		if($(answerTwo).text().indexOf('•ul•') >= 0) {
 			var res = answerTwo.innerHTML.replace(/•ul•/g, "<ul>");
+			answerTwo.innerHTML = res;
+		}
+		if($(answerTwo).text().indexOf('•ol•') >= 0) {
+			var res = answerTwo.innerHTML.replace(/•ol•/g, "<ol>");
 			answerTwo.innerHTML = res;
 		}
 		if($(answerTwo).text().indexOf('•li•') >= 0) {

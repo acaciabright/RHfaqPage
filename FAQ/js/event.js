@@ -16,54 +16,61 @@ $(window).scroll(function() {
 	}
 });
 
-////////////////////////CONTACT FORM HANDELER///////////////////////
+////////////////////////CONTACT FORM CLICK HANDLER//////////////////////////
 
-$('.textarea').blur(function() {
-	if(!$('.textarea')[0].checkValidity()) {
-		$('.text-field').addClass('error');
-	} 
-	else {
-		$('.text-field').removeClass('error');
-	}
-});
-var validateInput = function(i, field) {
- 	$('.input').blur(function() {
-		if(!$('.input')[i].checkValidity()) {
-			$(field).addClass('error');
-		} 
-		else {
-			$(field).removeClass('error');
-		}
-	});
-}
-validateInput(0, '.firstname-field');
-validateInput(1, '.lastname-field');
-validateInput(2, '.company-field');
-validateInput(3, '.tel-field');
-validateInput(4, '.email-field');
-validateInput(5, '.spam-field');
-
-
-////////////////////////ACCORDION CLICK HANDLER//////////////////////////
 $('body').off();
+
+$('body').on(
+	'click', '.submit', function(evt) {
+		var validateTextarea = function(i, field) {
+			$('.textarea').blur(function() {
+				if(!$('.textarea')[0].checkValidity()) {
+					$('.text-field').addClass('error');
+				} 
+				else {
+					$('.text-field').removeClass('error');
+				}
+			});
+		}
+		var validateInput = function(i, field) {
+	 		$('.input').blur(function() {
+				if(!$('.input')[i].checkValidity()) {
+					$(field).addClass('error');
+				} 
+				else {
+					$(field).removeClass('error');
+				}
+			});
+		}
+		validateInput(0, '.firstname-field');
+		validateInput(1, '.lastname-field');
+		validateInput(2, '.company-field');
+		validateInput(3, '.tel-field');
+		validateInput(4, '.email-field');
+		validateInput(5, '.spam-field');
+		validateTextarea(0, '.text-field');
+	}
+);
 
 $('body').on(
 	'click', '.formButton', function(evt) {
 		var html = $("html");
-		$('#formModal').addClass("scroll");
-		var open = $('#formModal.scroll');
-		if(open.length > 0) {
-			html.css({
-				'overflow': 'hidden'
-			});
-		}
-		else {
-			html.css({
-				'overflow': 'visible'
-			});
-		}
+		var open = $('#formModal');
+		open.addClass("scroll");
+		html.addClass("hidden");
 	}
 );
+
+$('body').on(
+	'click', '.close-reveal-modal, .reveal-modal-bg', function(evt) {
+		var html = $("html");
+		var open = $('#formModal');
+		open.removeClass("scroll");
+		html.removeClass("hidden");
+	}
+);
+
+////////////////////////ACCORDION CLICK HANDLER//////////////////////////
 
 $('body').on(
 	'click', '.general-entry', function(evt) {
