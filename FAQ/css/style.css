@@ -205,22 +205,18 @@ background: #7bb9c5;
 	background-color: #EFEFEF;
 }
 .accordion .accordion-navigation .video_image_p{
-	min-height: 200px;
 	padding-left: 50px;
 	padding-right: 50px;
 }
 .accordion .accordion-navigation .image_p{
-	min-height: 150px;
 	padding-left: 50px;
 	padding-right: 50px;
 }
 .accordion .accordion-navigation .video_p{
-	min-height: 100px;
 	padding-left: 50px;
 	padding-right: 50px;
 }
 .accordion .accordion-navigation ._p{
-	min-height: 100px;
 	padding-left: 50px;
 	padding-right: 50px;
 }
@@ -235,6 +231,7 @@ background: #7bb9c5;
 }
 .qContent {
 	background-color: white !important;
+	overflow: auto;
 }
 .qContent p {
 	line-height: 2;
@@ -516,6 +513,12 @@ background: #7bb9c5;
 
 /*********************SMALL-MEDIUM SCREEN***********************/
 @media screen and (min-width: 451px) and (max-width: 770px) {
+	p ul {
+		margin-left: 1.25rem !important;
+	}
+	p ol {
+		margin-left: 1.25rem !important;
+	}
 	.stickyHeader {
 		margin-top: 0px !important;
 	}
@@ -705,6 +708,9 @@ background: #7bb9c5;
 	}
 	.revealImg {
 		margin-right: 10px;
+	}
+	.qContent {
+		width: 100%;
 	}
 	.buttonDiv .contentDiv {
 		width: 230px;
