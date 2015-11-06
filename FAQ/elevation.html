@@ -8,7 +8,12 @@
 	ajax/libs/foundicons/3.0.0/foundation-icons.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
 	foundation/5.5.2/css/foundation.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="dist/css/faqbuilder.min.css">
+	<style type="text/css">
+		#Elevation {
+			display: block;
+		}
+	</style>
 </head>
 <body>
 	<div class="wrapper">
@@ -32,7 +37,7 @@
 				</nav>
 				<aside class="left-off-canvas-menu">
 					<ul class="off-canvas-list">
-						<div class="icon-bar vertical seven-up">
+						<div class="icon-bar vertical six-up">
 							<a href="general.html" class="item border">
 								<img src="images/cog2.png"></img>
 								<label id="itemlabel1">General</label>
@@ -41,7 +46,7 @@
 								<img src="images/neighborhoodW.png"></img>
 								<label id="itemlabel1">Neighborhood</label>
 							</a>
-							<a href="elevation.html" class="item border" style="background-color:#7bb9c5;">
+							<a href="elevation.html" class="item border background">
 								<img src="images/elevationW.png"></img>
 								<label id="itemlabel2">Elevation</label>
 							</a>
@@ -57,10 +62,6 @@
 								<img src="images/siteplanW.png"></img>
 								<label id="itemlabel5">Site Plan</label>
 							</a>
-							<a href="colorschemes.html" class="item">
-								<img src="images/colorschemes1.png"></img>
-								<label id="itemlabel6">Color Schemes</label>
-							</a>
 						</div>
 					</ul>
 				</aside>
@@ -68,7 +69,7 @@
 				<a class="exit-off-canvas"></a>
 			</div>
 		</div>
-		<div class="navDiv nav icon-bar seven-up" role="navigation">
+		<div class="navDiv nav icon-bar six-up" role="navigation">
 			<a href="general.html" class="item" aria-labelledby="#itemlabel1" 
 			role="button" tabindex="0">
 				<img src="images/cog2.png"></img>
@@ -79,8 +80,8 @@
 				<img src="images/neighborhoodW.png"></img>
 				<label id="itemlabel2">Neighborhood</label>
 			</a>
-			<a href="elevation.html" class="item" aria-labelledby="#itemlabel3" 
-			role="button" tabindex="0" style="background-color:#7bb9c5;">
+			<a href="elevation.html" class="item background" 
+			aria-labelledby="#itemlabel3" role="button" tabindex="0">
 				<img src="images/elevationW.png"></img>
 				<label id="itemlabel3">Elevation</label>
 			</a>
@@ -99,19 +100,9 @@
 				<img src="images/siteplanW.png"></img>
 				<label id="itemlabel6">Site Plan</label>
 			</a>
-			<a href="colorschemes.html" class="item item7" aria-labelledby="#itemlabel7"
-			role="button" tabindex="0">
-				<img src="images/colorschemes1.png"></img>
-				<label id="itemlabel7">Color Schemes</label>
-			</a>
 		</div>
 	</div>
 	<!--BODY-->
-	<style type="text/css">
-		#Elevation {
-			display: block;
-		}
-	</style>
 	<div class="push"></div>
 	</div>
 	<div class="footer">
@@ -127,80 +118,95 @@
 				content" aria-hidden="true" tabindex="-1">
 					<div class="contactDiv">
 						<p>376 Raleigh St<br>Holly Springs, NC 27540</p>
-						<p>info@renderinghouse.com</p>
-						<p>919-414-9072</p>
+						<p>apps@renderinghouse.com</p>
+						<p>919-867-1997</p>
 					</div>
 				</div>
 				<div class="button2 formFooterDiv">
-					<a href="#" data-reveal-id="formModal" class="formButton reveal footerButton 
-					button tiny radius">CONTACT FORM</a>
+					<a href="#" data-reveal-id="formModal" class="formButton reveal 
+					footerButton button tiny radius">CONTACT FORM</a>
 				</div>
-				<div data-reveal id="formModal" class="reveal-modal large" 
+				<div data-reveal id="formModal" class="reveal-modal medium" 
 				aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-					<form data-abide name="myForm" id="contactForm" method="post" action="php/form.php">
+					<form data-abide name="myForm" id="contactForm" method="post" 
+					action="php/form.php">
 						<div class="row">
-							<div class="large-6 columns name-field">
+							<div class="large-6 columns firstname-field">
 								<label>First name <small>required</small>
-									<input name="firstName" class="input" type="text" placeholder="First name"/ required>
+									<input name="firstName" class="input" type="text" 
+									placeholder="First name" required/>
 								</label>
-								<small class="error">First name is required and must be a string.</small>
+								<small class="error small">First name is required.</small>
 							</div>
-							<div class="large-6 columns name-field">
+							<div class="large-6 columns lastname-field">
 								<label>Last name <small>required</small>
-									<input name="lastName" class="input" type="text" placeholder="Last name"/ required>
+									<input name="lastName" class="input" type="text" 
+									placeholder="Last name" required/>
 								</label>
-								<small class="error">Last name is required and must be a string.</small>
+								<small class="error small">Last name is required.</small>
 							</div>
 						</div>
 						<div class="row">
 							<div class="large-12 columns company-field">
 								<label>Company <small>required</small>
-									<input name="company" class="input" type="text" placeholder="Company" required/>
+									<input name="company" class="input" type="text" 
+									placeholder="Company" required/>
 								</label>
-								<small class="error">Company name is required and must be a string. Please input "none" if inapplicable.</small>
+								<small class="error small">Company name is required. 
+								Please input "none" if inapplicable.</small>
 							</div>
 						</div>
 						<div class="row">
 							<div class="large-6 columns tel-field">
 								<label>Phone <small>required</small>
-									<input name="phone" class="input" type="tel" placeholder="Phone" required/>
+									<input name="phone" class="input" type="tel" 
+									pattern="^([+]?\d{1,4}\s?[-.]?)?((\((\d{3})\))|(\d{3}))[-.]?\s?
+									(\d{3})[-.]?\s?(\d{4})$" placeholder="Phone" required/>
 								</label>
-								<small class="error">Phone is required and must be a number.</small>
+								<small class="error small">Phone is required.</small>
 							</div>
 							<div class="large-6 columns email-field">
 								<label>Email <small>required</small>
-									<input name="email" class="input" type="email" placeholder="Email"/ required>
+									<input name="email" class="input" type="email" 
+									placeholder="Email" required/>
 								</label>
-								<small class="error">A valid email address is required.</small>
+								<small class="error small">A valid email address is required.
+								</small>
 							</div>
 						</div>
 						<div class="row">
 							<div class="large-12 columns text-field">
 								<label>Message <small>required</small>
-									<textarea name="message" placeholder="Message" required></textarea>
+									<textarea class="textarea" name="message" placeholder="Message" 
+									required></textarea>
 								</label>
-								<small class="error">A message is required.</small>
+								<small class="error small">A message is required.</small>
 							</div>
 						</div>
 						<div class="row">
 							<div class="large-6 columns checkbox-field">
 								<label>What is your preferred method of contact?</label>
-								<input name="emailCheck" id="checkbox1" type="checkbox"><label for="checkbox1">Email</label>
-								<input name="callCheck" id="checkbox2" type="checkbox"><label for="checkbox2">Call</label>
-								<input name="textCheck" id="checkbox3" type="checkbox"><label for="checkbox3">Text</label>
+								<input name="emailCheck" id="checkbox1" type="checkbox"><label 
+								for="checkbox1">Email</label>
+								<input name="callCheck" id="checkbox2" type="checkbox"><label 
+								for="checkbox2">Call</label>
+								<input name="textCheck" id="checkbox3" type="checkbox"><label 
+								for="checkbox3">Text</label>
 							</div>
 						</div>
 						<div class="row">
-							<div class="large-4 columns">
+							<div class="large-4 columns spam-field">
 								<label>What is 13 minus 6? <small>required</small>
-									<input name="test" type="number" placeholder="13-6=?" required pattern="7"/>
+									<input class="input" name="test" type="number" 
+									placeholder="13-6=?" required pattern="7"/>
 								</label>
-								<small class="error">A valid answer is required.</small>
+								<small class="error small">A valid answer is required.</small>
 							</div>
 						</div>
 						<div class="row">
 							<div class="large-2 columns submitButton">
-								<button class="submit videoButton" type="submit" value="Submit">Send</button>
+								<button class="submit videoButton" type="submit" value="Submit">
+								Send</button>
 							</div>
 						</div>
 					</form>
@@ -221,9 +227,8 @@
 	</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/
-foundation.min.js"></script>
-<script src="js/faq2.js"></script>
-<script src="js/event.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js">
+</script>
+<script src="dist/js/faqbuilder.min.js"></script>
 </body>
 </html>
