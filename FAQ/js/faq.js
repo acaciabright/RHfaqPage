@@ -36,7 +36,7 @@ function _Accordion() {
 	this.floorplan = [];
 	this.colortool = [];
 	this.siteplan = [];
-	this.colorschemes = [];
+	//this.colorschemes = [];
 }
 _Accordion.prototype.addObject = function(object, dest) {
 	var array = this[dest];
@@ -69,7 +69,7 @@ var _elevationArray;
 var _floorplanArray;
 var _colortoolArray;
 var _siteplanArray;
-var _colorschemesArray;
+//var _colorschemesArray;
 
 var accordionDeferred = $.Deferred();
 _deferreds.push(accordionDeferred);
@@ -79,13 +79,13 @@ var generalRequest = $.ajax({
 	url: 'php/getData.php',
 	data: {
 		"table": "Topics",
-		"sort": "question",
-		"section": "GENERAL"
+		"sort": "topicId",
+		"section": "GENERAL"	
 	}
 });
 generalRequest.done(function(data) {
 	if(data.search('OK') < 0) {
-		console.log('Failed somehow' + data);
+		console.log('Data search for "GENERAL" failed somehow' + data);
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_generalArray = $.parseJSON(split[1]); 
@@ -97,7 +97,7 @@ generalRequest.done(function(data) {
 	}
 });
 generalRequest.fail(function(data) { 
-	console.log('Failed somehow' + data);
+	console.log('Ajax request for "GENERAL" failed somehow' + data);
 });
 
 var neighborhoodRequest = $.ajax({
@@ -111,7 +111,7 @@ var neighborhoodRequest = $.ajax({
 });
 neighborhoodRequest.done(function(data) {
 	if(data.search('OK') < 0) {
-		console.log('Failed somehow' + data);
+		console.log('Data seach for "NEIGHBORHOOD" failed somehow' + data);
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_neighborhoodArray = $.parseJSON(split[1]); 
@@ -123,7 +123,7 @@ neighborhoodRequest.done(function(data) {
 	}
 });
 neighborhoodRequest.fail(function(data) { 
-	console.log('Failed somehow' + data);
+	console.log('Ajax request for "NEIGHBORHOOD" failed somehow' + data);
 });
 
 var elevationRequest = $.ajax({
@@ -137,7 +137,7 @@ var elevationRequest = $.ajax({
 });
 elevationRequest.done(function(data) {
 	if(data.search('OK') < 0) {
-		console.log('Failed somehow' + data);
+		console.log('Data seach for "ELEVATION" failed somehow' + data);
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_elevationArray = $.parseJSON(split[1]); 
@@ -149,7 +149,7 @@ elevationRequest.done(function(data) {
 	}
 });
 elevationRequest.fail(function(data) { 
-	console.log('Failed somehow' + data);
+	console.log('Ajax request for "ELEVATION" failed somehow' + data);
 });
 
 var floorplanRequest = $.ajax({
@@ -163,7 +163,7 @@ var floorplanRequest = $.ajax({
 });
 floorplanRequest.done(function(data) {
 	if(data.search('OK') < 0) {
-		console.log('Failed somehow' + data);
+		console.log('Data seach for "FLOORPLAN" failed somehow' + data);
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_floorplanArray = $.parseJSON(split[1]); 
@@ -175,7 +175,7 @@ floorplanRequest.done(function(data) {
 	}
 });
 floorplanRequest.fail(function(data) { 
-	console.log('Failed somehow' + data);
+	console.log('Ajax request for "FLOORPLAN" failed somehow' + data);
 });
 
 var colortoolRequest = $.ajax({
@@ -189,7 +189,7 @@ var colortoolRequest = $.ajax({
 });
 colortoolRequest.done(function(data) {
 	if(data.search('OK') < 0) {
-		console.log('Failed somehow' + data);
+		console.log('Data seach for "COLORTOOL" failed somehow' + data);
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_colortoolArray = $.parseJSON(split[1]); 
@@ -201,7 +201,7 @@ colortoolRequest.done(function(data) {
 	}
 });
 colortoolRequest.fail(function(data) { 
-	console.log('Failed somehow' + data);
+	console.log('Ajax request for "COLORTOOL" failed somehow' + data);
 });
 
 var siteplanRequest = $.ajax({
@@ -215,7 +215,7 @@ var siteplanRequest = $.ajax({
 });
 siteplanRequest.done(function(data) {
 	if(data.search('OK') < 0) {
-		console.log('Failed somehow' + data);
+		console.log('Data seach for "SITEPLAN" failed somehow' + data);
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_siteplanArray = $.parseJSON(split[1]); 
@@ -224,12 +224,13 @@ siteplanRequest.done(function(data) {
 			var siteplanObject = new _Section($(curAccordion));
 			accordion.addObject(siteplanObject, 'siteplan');
 		}
+		accordionDeferred.resolve();
 	}
 });
 siteplanRequest.fail(function(data) { 
-	console.log('Failed somehow' + data);
+	console.log('Ajax request for "SITEPLAN" failed somehow' + data);
 });
-
+/*
 var colorschemesRequest = $.ajax({
 	type: "POST",
 	url: 'php/getData.php',
@@ -241,7 +242,7 @@ var colorschemesRequest = $.ajax({
 });
 colorschemesRequest.done(function(data) {
 	if(data.search('OK') < 0) {
-		console.log('Failed somehow' + data);
+		console.log('Data seach for "COLORSCHEMES" failed somehow' + data);
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_colorschemesArray = $.parseJSON(split[1]); 
@@ -254,9 +255,9 @@ colorschemesRequest.done(function(data) {
 	}
 });
 colorschemesRequest.fail(function(data) { 
-	console.log('Failed somehow' + data);
+	console.log('Ajax request for "COLORSCHEMES" failed somehow' + data);
 });
-
+*/
 /////////////////////////////////////////////////////////////////
 /////////////////////////FILL PAGE SECTION///////////////////////
 /////////////////////////////////////////////////////////////////
@@ -282,7 +283,8 @@ $(mainSection).append(body);
 $(header).after(body2);
 
 var counter = 1;
-_FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryText, panel) {
+_FAQ.prototype.addSection = function 
+(headerText, sectionId, sectionText, entryText, panel) {
 	var main = this.el;
 	var sectionDiv = $('<div>').attr({
 		'id': sectionId
@@ -336,17 +338,24 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 				'href': '#',
 				'data-reveal-id': 'myModal' + counter,
 				'id': 'revealImg',
-				'class': 'reveal',
+				'class': 'reveal1',
 				'style': 'outline:none'
 			});
 			revealDiv.append(imgModal);
+			var imgWrap = $('<div>').addClass("imgWrap imgWrapTwo" + counter);
+			imgModal.append(imgWrap);
 			var revealImg = $('<img>').attr({
-				'src': 'images/screenshot2.png',
+				'src': data.get('screenShot'),
 				'class': 'revealImg revealImgTwo' + counter
 			});
-			if (data.get('screenShot') !== null) {
-				imgModal.append(revealImg);
+			if(data.get('screenShot') !== null) {
+				imgWrap.append(revealImg);
 			}
+			var span = $('<span>').addClass('span spanTwo'  + counter);
+			imgWrap.append(span);
+			var imgNumber = $('<span>').addClass('imgNumber imgNumberTwo' + counter)
+			.text(number);
+			span.append(imgNumber);
 			var videoModal = $('<a>').attr({
 				'href': '#',
 				'data-reveal-id': 'videoModal'  + counter,
@@ -421,11 +430,13 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 			answer.append(p);
 		}
 
+		var number = 1;
 		var counter2 = 1;
 		var steps = data.get('steps');
 		if(steps.length > 0 && data.get('answer') == null) {
 			var revealDiv = $('<div>').addClass("revealDiv revealDivTwo" + counter);
 			div.append(revealDiv);
+			$('.reveal1').hide();
 			for(i in steps) {
 				var step = steps[i];
 				var imgModal = $('<a>').attr({
@@ -436,13 +447,20 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 					'style': 'outline:none'
 				});
 				revealDiv.append(imgModal);
+				var imgWrap = $('<div>').addClass("imgWrap imgWrapTwo" + counter);
+				imgModal.append(imgWrap);
 				var revealImg = $('<img>').attr({
 					'src': step.get('img'),
 					'class': 'revealImg revealImgTwo' + counter
 				});
 				if(step.get('img') !== null) {
-					imgModal.append(revealImg);
+					imgWrap.append(revealImg);
 				}
+				var span = $('<span>').addClass('span spanTwo'  + counter);
+				imgWrap.append(span);
+				var imgNumber = $('<span>').addClass('imgNumber imgNumberTwo' + counter)
+				.text(number);
+				span.append(imgNumber);
 				var imgReveal = $('<div data-reveal>').attr({
 					'id': 'myModal2' + counter2 + counter,
 					'class': 'reveal-modal imgModal xlarge',
@@ -476,7 +494,8 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 					answer.append(p);
 				}
 				var answerId = $('#' + (panel + counter));
-				if($('.revealDivTwo' + counter).length > 0 && $('.revealImgTwo' + counter).length > 1) {
+				if($('.revealDivTwo' + counter).length > 0 && $('.revealImgTwo' + counter)
+				.length > 1) {
 					$(answerId).css({
 						'width': '100%'
 					});
@@ -488,8 +507,20 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 						'width': '80px',
 						'margin-right': '10px !important'
 					});
+					$('.spanTwo' + counter).css({
+						'height': '80px',
+						'width': '80px'
+					});
+					$('.imgWrapTwo' + counter).css({
+						'height': '80px',
+						'width': '80px'
+					});
+					$('.imgNumberTwo' + counter).css({
+						'height': '80px',
+						'width': '80px'
+					});
 				}
-
+				number++;
 				counter2++;
 			}
 		}
@@ -571,7 +602,8 @@ _FAQ.prototype.addSection = function(headerText, sectionId, sectionText, entryTe
 	}
 };
 
-_FAQ.prototype.addSection2 = function(headerText, sectionId, sectionText, entryText, panel) {
+_FAQ.prototype.addSection2 = function 
+(headerText, sectionId, sectionText, entryText, panel) {
 	var main = this.el;
 	var sectionDiv = $('<div>').attr({
 		'id': sectionId
@@ -625,17 +657,24 @@ _FAQ.prototype.addSection2 = function(headerText, sectionId, sectionText, entryT
 				'href': '#',
 				'data-reveal-id': 'myModal' + counter,
 				'id': 'revealImg',
-				'class': 'reveal',
+				'class': 'reveal1',
 				'style': 'outline:none'
 			});
 			revealDiv.append(imgModal);
+			var imgWrap = $('<div>').addClass("imgWrap imgWrapTwo" + counter);
+			imgModal.append(imgWrap);
 			var revealImg = $('<img>').attr({
-				'src': 'images/screenshot2.png',
+				'src': data.get('screenShot'),
 				'class': 'revealImg revealImgTwo' + counter
 			});
 			if(data.get('screenShot') !== null) {
-				imgModal.append(revealImg);
+				imgWrap.append(revealImg);
 			}
+			var span = $('<span>').addClass('span spanTwo'  + counter);
+			imgWrap.append(span);
+			var imgNumber = $('<span>').addClass('imgNumber imgNumberTwo' + counter)
+			.text(number);
+			span.append(imgNumber);
 			var videoModal = $('<a>').attr({
 				'href': '#',
 				'data-reveal-id': 'videoModal' + counter,
@@ -722,10 +761,13 @@ _FAQ.prototype.addSection2 = function(headerText, sectionId, sectionText, entryT
 			answer.append(p);
 		}
 		var counter2 = 1;
+		var number = 1;
 		var steps = data.get('steps');
 		if(steps.length > 0 && data.get('answer') == null) {
-			var revealDiv = $('<div>').addClass("screenshotDiv revealDiv revealDivTwo" + counter);
+			var revealDiv = $('<div>')
+			.addClass("screenshotDiv revealDiv revealDivTwo" + counter);
 			div.append(revealDiv);
+			$('.reveal1').hide();
 			for(i in steps) {
 				var step = steps[i];
 				var imgModal = $('<a>').attr({
@@ -736,13 +778,20 @@ _FAQ.prototype.addSection2 = function(headerText, sectionId, sectionText, entryT
 					'style': 'outline:none'
 				});
 				revealDiv.append(imgModal);
+				var imgWrap = $('<div>').addClass("imgWrap imgWrapTwo" + counter);
+				imgModal.append(imgWrap);
 				var revealImg = $('<img>').attr({
 					'src': step.get('img'),
 					'class': 'revealImg revealImgTwo' + counter
 				});
 				if(step.get('img') !== null) {
-					imgModal.append(revealImg);
+					imgWrap.append(revealImg);
 				}
+				var span = $('<span>').addClass('span spanTwo'  + counter);
+				imgWrap.append(span);
+				var imgNumber = $('<span>').addClass('imgNumber imgNumberTwo' + counter)
+				.text(number);
+				span.append(imgNumber);
 				var imgReveal = $('<div data-reveal>').attr({
 					'id': 'myModal2' + counter2 + counter,
 					'class': 'reveal-modal imgModal xlarge',
@@ -776,7 +825,8 @@ _FAQ.prototype.addSection2 = function(headerText, sectionId, sectionText, entryT
 					answer.append(p);
 				}
 				var answerId = $('#' + (panel + counter));
-				if($('.revealDivTwo' + counter).length > 0 && $('.revealImgTwo' + counter).length > 1) {
+				if($('.revealDivTwo' + counter).length > 0 && $('.revealImgTwo' + counter)
+				.length > 1) {
 					$(answerId).css({
 						'width': '100%'
 					});
@@ -787,8 +837,20 @@ _FAQ.prototype.addSection2 = function(headerText, sectionId, sectionText, entryT
 						'height': '75px',
 						'width': '75px'
 					});
+					$('.spanTwo' + counter).css({
+						'height': '75px',
+						'width': '75px'
+					});
+					$('.imgWrapTwo' + counter).css({
+						'height': '75px',
+						'width': '75px'
+					});
+					$('.imgNumberTwo' + counter).css({
+						'height': '75px',
+						'width': '75px'
+					});
 				}
-
+				number++;
 				counter2++;
 			}
 		}
@@ -867,20 +929,32 @@ _FAQ.prototype.addSection2 = function(headerText, sectionId, sectionText, entryT
 $.when.apply(null, _deferreds).done(function() { //executes code after the response
 	_faq = new _FAQ('<div>');
 	$('body').append(_faq.el);
-	_faq.addSection("General FAQs", 'General', 'general', 'general-entry', 'panel1a');
-	_faq.addSection2("General FAQs", 'General', 'general', 'general-entry', 'panel1a');
-	_faq.addSection("Neighborhood FAQs", 'Neighborhood', 'neighborhood', 'neighborhood-entry', 'panel1b');
-	_faq.addSection2("Neighborhood FAQs", 'Neighborhood', 'neighborhood', 'neighborhood-entry', 'panel1b');
-	_faq.addSection("Elevation FAQs", 'Elevation', 'elevation', 'elevation-entry', 'panel1c');
-	_faq.addSection2("Elevation FAQs", 'Elevation', 'elevation', 'elevation-entry', 'panel1c');
-	_faq.addSection("Floorplan FAQs", 'Floorplan', 'floorplan', 'floorplan-entry', 'panel1d');
-	_faq.addSection2("Floorplan FAQs", 'Floorplan', 'floorplan', 'floorplan-entry', 'panel1d');
-	_faq.addSection("Color Tool FAQs", 'Colortool', 'colortool', 'colortool-entry', 'panel1e');
-	_faq.addSection2("Color Tool FAQs", 'Colortool', 'colortool', 'colortool-entry', 'panel1e');
-	_faq.addSection("Site Plan FAQs", 'Siteplan', 'siteplan', 'siteplan-entry', 'panel1f');
-	_faq.addSection2("Site Plan FAQs", 'Siteplan', 'siteplan', 'siteplan-entry', 'panel1f');
-	_faq.addSection("Color Schemes FAQs", 'Colorschemes', 'colorschemes', 'colorschemes-entry', 'panel1g');
-	_faq.addSection2("Color Schemes FAQs", 'Colorschemes', 'colorschemes', 'colorschemes-entry', 'panel1g');
+	_faq.addSection("Updates", 'General', 'general', 'general-entry', 'panel1a');
+	_faq.addSection2("Updates", 'General', 'general', 'general-entry', 'panel1a');
+	_faq.addSection("Neighborhood FAQs", 'Neighborhood', 'neighborhood',
+	 'neighborhood-entry', 'panel1b');
+	_faq.addSection2("Neighborhood FAQs", 'Neighborhood', 'neighborhood', 
+		'neighborhood-entry', 'panel1b');
+	_faq.addSection("Elevation FAQs", 'Elevation', 'elevation', 'elevation-entry',
+	 'panel1c');
+	_faq.addSection2("Elevation FAQs", 'Elevation', 'elevation', 'elevation-entry',
+	 'panel1c');
+	_faq.addSection("Floorplan FAQs", 'Floorplan', 'floorplan', 'floorplan-entry',
+	 'panel1d');
+	_faq.addSection2("Floorplan FAQs", 'Floorplan', 'floorplan', 'floorplan-entry',
+	 'panel1d');
+	_faq.addSection("Color Tool FAQs", 'Colortool', 'colortool', 'colortool-entry',
+	 'panel1e');
+	_faq.addSection2("Color Tool FAQs", 'Colortool', 'colortool', 'colortool-entry',
+	 'panel1e');
+	_faq.addSection("Site Plan FAQs", 'Siteplan', 'siteplan', 'siteplan-entry',
+	 'panel1f');
+	_faq.addSection2("Site Plan FAQs", 'Siteplan', 'siteplan', 'siteplan-entry',
+	 'panel1f');
+	//_faq.addSection("Color Schemes FAQs", 'Colorschemes', 'colorschemes',
+	//'colorschemes-entry', 'panel1g');
+	//_faq.addSection2("Color Schemes FAQs", 'Colorschemes', 'colorschemes', 
+	//'colorschemes-entry', 'panel1g');
 });
 
 /////////////////////////////////////////////////////////////////
