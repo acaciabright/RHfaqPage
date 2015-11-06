@@ -1,5 +1,5 @@
 <?php 
-	$to = 'dashboardfaqtest@gmail.com'; 
+	$to = 'apps@renderinghouse.com'; 
 	$subject = 'Dashboard FAQ contact'; 
 	$firstName = $_POST['firstName']; 
 	$lastName = $_POST['lastName']; 
