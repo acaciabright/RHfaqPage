@@ -2,6 +2,22 @@
 ///////////OBJECT CONSTRUCTOR AND PROTOTYPE SECTION//////////////
 /////////////////////////////////////////////////////////////////
 
+function _Accordion() {
+	this.general = [];
+	this.neighborhood = [];
+	this.elevation = [];
+	this.floorplan = [];
+	this.colortool = [];
+	this.siteplan = [];
+}
+_Accordion.prototype.addObject = function(object, dest) {
+	var array = this[dest];
+	array.push(object);
+};
+_Accordion.prototype.getObjects = function(dest) {
+	return this[dest];
+};
+
 function _Section(data) {
 	this.question = data.prop('question');
 	this.answer = data.prop('answer');
@@ -11,7 +27,7 @@ function _Section(data) {
 	this.steps = [];
 
 	var stepsArray = data.prop('steps');
-	for(i in stepsArray) {
+	for(var i in stepsArray) {
 		var curStep = stepsArray[i];
 		var stepObject = new _Step($(curStep));
 		this.addStep(stepObject);
@@ -24,26 +40,6 @@ _Section.prototype.addStep = function(object) {
 };
 _Section.prototype.get = function(prop) {
 	return this[prop];
-}
-_Section.prototype.set = function(prop, newVal) {
-	this[prop] = newVal;
-}
-
-function _Accordion() {
-	this.general = [];
-	this.neighborhood = [];
-	this.elevation = [];
-	this.floorplan = [];
-	this.colortool = [];
-	this.siteplan = [];
-	//this.colorschemes = [];
-}
-_Accordion.prototype.addObject = function(object, dest) {
-	var array = this[dest];
-	array.push(object);
-};
-_Accordion.prototype.getObjects = function(dest) {
-	return this[dest];
 };
 
 function _Step(data) {
@@ -55,7 +51,7 @@ function _Step(data) {
 }
 _Step.prototype.get = function(prop) {
 	return this[prop];
-}
+};
 
 /////////////////////////////////////////////////////////////////
 ////////////////////DATA REQUEST SECTION/////////////////////////
@@ -69,7 +65,6 @@ var _elevationArray;
 var _floorplanArray;
 var _colortoolArray;
 var _siteplanArray;
-//var _colorschemesArray;
 
 var accordionDeferred = $.Deferred();
 _deferreds.push(accordionDeferred);
@@ -89,7 +84,7 @@ generalRequest.done(function(data) {
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_generalArray = $.parseJSON(split[1]); 
-		for(i in _generalArray) {
+		for(var i in _generalArray) {
 			var curAccordion = _generalArray[i];
 			var generalObject = new _Section($(curAccordion));
 			accordion.addObject(generalObject, 'general');
@@ -115,7 +110,7 @@ neighborhoodRequest.done(function(data) {
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_neighborhoodArray = $.parseJSON(split[1]); 
-		for(i in _neighborhoodArray) {
+		for(var i in _neighborhoodArray) {
 			var curAccordion = _neighborhoodArray[i];
 			var neighborhoodObject = new _Section($(curAccordion));
 			accordion.addObject(neighborhoodObject, 'neighborhood');
@@ -141,7 +136,7 @@ elevationRequest.done(function(data) {
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_elevationArray = $.parseJSON(split[1]); 
-		for(i in _elevationArray) {
+		for(var i in _elevationArray) {
 			var curAccordion = _elevationArray[i];
 			var elevationObject = new _Section($(curAccordion));
 			accordion.addObject(elevationObject, 'elevation');
@@ -167,7 +162,7 @@ floorplanRequest.done(function(data) {
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_floorplanArray = $.parseJSON(split[1]); 
-		for(i in _floorplanArray) {
+		for(var i in _floorplanArray) {
 			var curAccordion = _floorplanArray[i];
 			var floorplanObject = new _Section($(curAccordion));
 			accordion.addObject(floorplanObject, 'floorplan');
@@ -193,7 +188,7 @@ colortoolRequest.done(function(data) {
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_colortoolArray = $.parseJSON(split[1]); 
-		for(i in _colortoolArray) {
+		for(var i in _colortoolArray) {
 			var curAccordion = _colortoolArray[i];
 			var colortoolObject = new _Section($(curAccordion));
 			accordion.addObject(colortoolObject, 'colortool');
@@ -219,7 +214,7 @@ siteplanRequest.done(function(data) {
 	} else {
 		var split = data.split("^S^P^L^I^T^");
 		_siteplanArray = $.parseJSON(split[1]); 
-		for(i in _siteplanArray) {
+		for(var i in _siteplanArray) {
 			var curAccordion = _siteplanArray[i];
 			var siteplanObject = new _Section($(curAccordion));
 			accordion.addObject(siteplanObject, 'siteplan');
@@ -230,34 +225,7 @@ siteplanRequest.done(function(data) {
 siteplanRequest.fail(function(data) { 
 	console.log('Ajax request for "SITEPLAN" failed somehow' + data);
 });
-/*
-var colorschemesRequest = $.ajax({
-	type: "POST",
-	url: 'php/getData.php',
-	data: {
-		"table": "Topics",
-		"sort": "question",
-		"section": "COLORSCHEMES"
-	}
-});
-colorschemesRequest.done(function(data) {
-	if(data.search('OK') < 0) {
-		console.log('Data seach for "COLORSCHEMES" failed somehow' + data);
-	} else {
-		var split = data.split("^S^P^L^I^T^");
-		_colorschemesArray = $.parseJSON(split[1]); 
-		for(i in _colorschemesArray) {
-			var curAccordion = _colorschemesArray[i];
-			var colorschemesObject = new _Section($(curAccordion));
-			accordion.addObject(colorschemesObject, 'colorschemes');
-		}
-		accordionDeferred.resolve();
-	}
-});
-colorschemesRequest.fail(function(data) { 
-	console.log('Ajax request for "COLORSCHEMES" failed somehow' + data);
-});
-*/
+
 /////////////////////////////////////////////////////////////////
 /////////////////////////FILL PAGE SECTION///////////////////////
 /////////////////////////////////////////////////////////////////
@@ -300,7 +268,7 @@ _FAQ.prototype.addSection = function
 	accordionDiv.append(ul);
 
 	var database = accordion.getObjects(sectionText);
-	for (e in database) {
+	for (var e in database) {
 		var data = database[e];
 
 		var questionOne = $('<li>').addClass("accordion-navigation");
@@ -426,18 +394,18 @@ _FAQ.prototype.addSection = function
 			'id': 'answerP' + counter,
 			'class': 'answer answerTwo' + counter
 		}).text(data.get('answer'));
-		if(data.get('answer') !== null && data.get('answer') != '') {
+		if(data.get('answer') !== null && data.get('answer') !== '') {
 			answer.append(p);
 		}
 
 		var number = 1;
 		var counter2 = 1;
 		var steps = data.get('steps');
-		if(steps.length > 0 && data.get('answer') == null) {
+		if(steps.length > 0 && data.get('answer') === null) {
 			var revealDiv = $('<div>').addClass("revealDiv revealDivTwo" + counter);
 			div.append(revealDiv);
 			$('.reveal1').hide();
-			for(i in steps) {
+			for(var i in steps) {
 				var step = steps[i];
 				var imgModal = $('<a>').attr({
 					'href': '#',
@@ -490,7 +458,7 @@ _FAQ.prototype.addSection = function
 					'id': 'answerP' + counter,
 					'class': 'answer answerTwo' + counter
 				}).text(step.get('text'));
-				if(step.get('text') !== null && step.get('text') != '') {
+				if(step.get('text') !== null && step.get('text') !== '') {
 					answer.append(p);
 				}
 				var answerId = $('#' + (panel + counter));
@@ -619,7 +587,7 @@ _FAQ.prototype.addSection2 = function
 	accordionDiv.append(ul);
 
 	var database = accordion.getObjects(sectionText);
-	for (e in database) {
+	for (var e in database) {
 		var data = database[e];
 
 		var questionOne = $('<li>').addClass("accordion-navigation");
@@ -675,16 +643,6 @@ _FAQ.prototype.addSection2 = function
 			var imgNumber = $('<span>').addClass('imgNumber imgNumberTwo' + counter)
 			.text(number);
 			span.append(imgNumber);
-			var videoModal = $('<a>').attr({
-				'href': '#',
-				'data-reveal-id': 'videoModal' + counter,
-				'id': 'video',
-				'class': 'reveal videoButton button small radius videoButtonTwo' + counter,
-				'style': 'outline: none'
-			}).text("VIDEO");
-			if(data.get('videoURL') !== null) {
-				revealDiv.append(videoModal);
-			}
 			var imgReveal = $('<div data-reveal>').attr({
 				'id': 'myModal' + counter,
 				'class': 'reveal-modal imgModal xlarge',
@@ -710,6 +668,24 @@ _FAQ.prototype.addSection2 = function
 			var imgX = $('<i>').addClass("fi-x");
 			imgClose.append(imgX);
 
+			var p = $('<p>').attr({
+				'id': 'answerP' + counter,
+				'class': 'answer answerTwo' + counter
+			}).text(data.get('answer'));
+			if(data.get('answer') !== null && data.get('answer') !== '') {
+				answer.append(p);
+			}
+
+			var videoModal = $('<a>').attr({
+				'href': '#',
+				'data-reveal-id': 'videoModal' + counter,
+				'id': 'video',
+				'class': 'reveal videoButton button small radius videoButtonTwo' + counter,
+				'style': 'outline: none'
+			}).text("VIDEO");
+			if(data.get('videoURL') !== null) {
+				revealDiv.append(videoModal);
+			}
 			var videoReveal = $('<div data-reveal>').attr({
 				'id': 'videoModal' + counter,
 				'class': 'reveal-modal videoModal xlarge',
@@ -720,10 +696,6 @@ _FAQ.prototype.addSection2 = function
 			if(data.get('videoURL') !== null) {
 				answer.append(videoReveal);
 			}
-			/*
-			var videoDiv = $('<div>').addClass("flex-video widescreen");
-			videoReveal.append(videoDiv);
-			*/
 			var video = $('<video controls>').attr({
 				'width': '100%',
 				'height': '100%',
@@ -738,7 +710,7 @@ _FAQ.prototype.addSection2 = function
 				'src': data.get('videoURL2'),
 				'type': 'video/webm',
 				'class': 'source2'
-			})
+			});
 			video.append(source);
 			video.append(source2);
 			if(data.get('videoURL') !== null) {
@@ -753,22 +725,15 @@ _FAQ.prototype.addSection2 = function
 			videoClose.append(vidX);
 		}
 
-		var p = $('<p>').attr({
-			'id': 'answerP' + counter,
-			'class': 'answer answerTwo' + counter
-		}).text(data.get('answer'));
-		if(data.get('answer') !== null && data.get('answer') != '') {
-			answer.append(p);
-		}
 		var counter2 = 1;
 		var number = 1;
 		var steps = data.get('steps');
-		if(steps.length > 0 && data.get('answer') == null) {
+		if(steps.length > 0 && data.get('answer') === null) {
 			var revealDiv = $('<div>')
 			.addClass("screenshotDiv revealDiv revealDivTwo" + counter);
 			div.append(revealDiv);
 			$('.reveal1').hide();
-			for(i in steps) {
+			for(var i in steps) {
 				var step = steps[i];
 				var imgModal = $('<a>').attr({
 					'href': '#',
@@ -821,7 +786,7 @@ _FAQ.prototype.addSection2 = function
 					'id': 'answerP' + counter,
 					'class': 'answer answerTwo' + counter
 				}).text(step.get('text'));
-				if(step.get('text') !== null && step.get('text') != '') {
+				if(step.get('text') !== null && step.get('text') !== '') {
 					answer.append(p);
 				}
 				var answerId = $('#' + (panel + counter));
@@ -926,7 +891,7 @@ _FAQ.prototype.addSection2 = function
 	}
 };
 
-$.when.apply(null, _deferreds).done(function() { //executes code after the response
+var deferredDone = $.when.apply(null, _deferreds).done(function() { //executes code after the response
 	_faq = new _FAQ('<div>');
 	$('body').append(_faq.el);
 	_faq.addSection("Updates", 'General', 'general', 'general-entry', 'panel1a');
@@ -951,10 +916,6 @@ $.when.apply(null, _deferreds).done(function() { //executes code after the respo
 	 'panel1f');
 	_faq.addSection2("Site Plan FAQs", 'Siteplan', 'siteplan', 'siteplan-entry',
 	 'panel1f');
-	//_faq.addSection("Color Schemes FAQs", 'Colorschemes', 'colorschemes',
-	//'colorschemes-entry', 'panel1g');
-	//_faq.addSection2("Color Schemes FAQs", 'Colorschemes', 'colorschemes', 
-	//'colorschemes-entry', 'panel1g');
 });
 
 /////////////////////////////////////////////////////////////////
@@ -963,10 +924,10 @@ $.when.apply(null, _deferreds).done(function() { //executes code after the respo
 
 //removes Foundation's specified behavior for dropdowns on small screens(mobile)
 var smallDropdown = function() {
-  Foundation.libs.dropdown['small'] = function() {
+  Foundation.libs.dropdown.small = function() {
     return false;
   };
-}
+};
 smallDropdown();
 
 $(document).foundation();

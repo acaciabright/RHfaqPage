@@ -31,7 +31,7 @@ $('body').on(
 					$('.text-field').removeClass('error');
 				}
 			});
-		}
+		};
 		var validateInput = function(i, field) {
 	 		$('.input').blur(function() {
 				if(!$('.input')[i].checkValidity()) {
@@ -41,7 +41,7 @@ $('body').on(
 					$(field).removeClass('error');
 				}
 			});
-		}
+		};
 		validateInput(0, '.firstname-field');
 		validateInput(1, '.lastname-field');
 		validateInput(2, '.company-field');
@@ -108,11 +108,6 @@ $('body').on(
 				var activeDataId = activeSiteplan.attr('data-id');
 				$('#panel1f' + activeDataId).hide();
 			}
-			var activeColorschemes = $('.colorschemes-entry.active');
-			if(activeColorschemes.length > 0) {
-				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1g' + activeDataId).hide();
-			}
 
 			$('.general-entry').removeClass('active outline');
 			$('.neighborhood-entry').removeClass('active outline');
@@ -120,7 +115,6 @@ $('body').on(
 			$('.floorplan-entry').removeClass('active outline');
 			$('.colortool-entry').removeClass('active outline');
 			$('.siteplan-entry').removeClass('active outline');
-			$('.colorschemes-entry').removeClass('active outline');
 			$(this).addClass('active outline');
 			$('#panel1a' + dataId).show();
 		} else {
@@ -165,11 +159,6 @@ $('body').on(
 				var activeDataId = activeSiteplan.attr('data-id');
 				$('#panel1f' + activeDataId).hide();
 			}
-			var activeColorschemes = $('.colorschemes-entry.active');
-			if(activeColorschemes.length > 0) {
-				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1g' + activeDataId).hide();
-			}
 
 			$('.neighborhood-entry').removeClass('active outline');
 			$('.general-entry').removeClass('active outline');
@@ -177,7 +166,6 @@ $('body').on(
 			$('.floorplan-entry').removeClass('active outline');
 			$('.colortool-entry').removeClass('active outline');
 			$('.siteplan-entry').removeClass('active outline');
-			$('.colorschemes-entry').removeClass('active outline');
 			$(this).addClass('active outline');
 			$('#panel1b' + dataId).show();
 		} else {
@@ -222,18 +210,12 @@ $('body').on(
 				var activeDataId = activeSiteplan.attr('data-id');
 				$('#panel1f' + activeDataId).hide();
 			}
-			var activeColorschemes = $('.colorschemes-entry.active');
-			if(activeColorschemes.length > 0) {
-				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1g' + activeDataId).hide();
-			}
 			$('.elevation-entry').removeClass('active outline');
 			$('.general-entry').removeClass('active outline');
 			$('.neighborhood-entry').removeClass('active outline');
 			$('.floorplan-entry').removeClass('active outline');
 			$('.colortool-entry').removeClass('active outline');
 			$('.siteplan-entry').removeClass('active outline');
-			$('.colorschemes-entry').removeClass('active outline');
 			$(this).addClass('active outline');
 			$('#panel1c' + dataId).show();
 		} else {
@@ -278,18 +260,12 @@ $('body').on(
 				var activeDataId = activeSiteplan.attr('data-id');
 				$('#panel1f' + activeDataId).hide();
 			}
-			var activeColorschemes = $('.colorschemes-entry.active');
-			if(activeColorschemes.length > 0) {
-				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1g' + activeDataId).hide();
-			}
 			$('.floorplan-entry').removeClass('active outline');
 			$('.general-entry').removeClass('active outline');
 			$('.neighborhood-entry').removeClass('active outline');
 			$('.elevation-entry').removeClass('active outline');
 			$('.colortool-entry').removeClass('active outline');
 			$('.siteplan-entry').removeClass('active outline');
-			$('.colorschemes-entry').removeClass('active outline');
 			$(this).addClass('active outline');
 			$('#panel1d' + dataId).show();
 		} else {
@@ -334,18 +310,12 @@ $('body').on(
 				var activeDataId = activeSiteplan.attr('data-id');
 				$('#panel1f' + activeDataId).hide();
 			}
-			var activeColorschemes = $('.colorschemes-entry.active');
-			if(activeColorschemes.length > 0) {
-				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1g' + activeDataId).hide();
-			}
 			$('.colortool-entry').removeClass('active outline');
 			$('.general-entry').removeClass('active outline');
 			$('.neighborhood-entry').removeClass('active outline');
 			$('.elevation-entry').removeClass('active outline');
 			$('.floorplan-entry').removeClass('active outline');
 			$('.siteplan-entry').removeClass('active outline');
-			$('.colorschemes-entry').removeClass('active outline');
 			$(this).addClass('active outline');
 			$('#panel1e' + dataId).show();
 		} else {
@@ -390,78 +360,16 @@ $('body').on(
 				var activeDataId = activeColortool.attr('data-id');
 				$('#panel1e' + activeDataId).hide();
 			}
-			var activeColorschemes = $('.colorschemes-entry.active');
-			if(activeColorschemes.length > 0) {
-				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1g' + activeDataId).hide();
-			}
 			$('.siteplan-entry').removeClass('active outline');
 			$('.general-entry').removeClass('active outline');
 			$('.neighborhood-entry').removeClass('active outline');
 			$('.elevation-entry').removeClass('active outline');
 			$('.floorplan-entry').removeClass('active outline');
 			$('.colortool-entry').removeClass('active outline');
-			$('.colorschemes-entry').removeClass('active outline');
 			$(this).addClass('active outline');
 			$('#panel1f' + dataId).show();
 		} else {
 			$('#panel1f' + dataId).hide();
-			$(this).removeClass('active outline');
-		}
-	}
-);
-$('body').on(
-	'click', '.colorschemes-entry', function(evt) {
-		evt.preventDefault();
-		evt.stopImmediatePropagation();
-		var dataId = parseInt($(this).attr('data-id'), 10);
-		if(!$(this).hasClass("active")) {
-			var activeColorschemes = $('.colorschemes-entry.active');
-			if(activeColorschemes.length > 0) {
-				var activeDataId = activeColorschemes.attr('data-id');
-				$('#panel1g' + activeDataId).hide();
-			}
-			var activeGeneral = $('.general-entry.active');
-			if(activeGeneral.length > 0) {
-				var activeDataId = activeGeneral.attr('data-id');
-				$('#panel1a' + activeDataId).hide();
-			}
-			var activeNeighborhood = $('.neighborhood-entry.active');
-			if(activeNeighborhood.length > 0) {
-				var activeDataId = activeNeighborhood.attr('data-id');
-				$('#panel1b' + activeDataId).hide();
-			}
-			var activeElevation = $('.elevation-entry.active');
-			if(activeElevation.length > 0) {
-				var activeDataId = activeElevation.attr('data-id');
-				$('#panel1c' + activeDataId).hide();
-			}
-			var activeFloorplan = $('.floorplan-entry.active');
-			if(activeFloorplan.length > 0) {
-				var activeDataId = activeFloorplan.attr('data-id');
-				$('#panel1d' + activeDataId).hide();
-			}
-			var activeColortool= $('.colortool-entry.active');
-			if(activeColortool.length > 0) {
-				var activeDataId = activeColortool.attr('data-id');
-				$('#panel1e' + activeDataId).hide();
-			}
-			var activeSiteplan = $('.siteplan-entry.active');
-			if(activeSiteplan.length > 0) {
-				var activeDataId = activeSiteplan.attr('data-id');
-				$('#panel1f' + activeDataId).hide();
-			}
-			$('.colorschemes-entry').removeClass('active outline');
-			$('.general-entry').removeClass('active outline');
-			$('.neighborhood-entry').removeClass('active outline');
-			$('.elevation-entry').removeClass('active outline');
-			$('.floorplan-entry').removeClass('active outline');
-			$('.colortool-entry').removeClass('active outline');
-			$('.siteplan-entry').removeClass('active outline');
-			$(this).addClass('active outline');
-			$('#panel1g' + dataId).show();
-		} else {
-			$('#panel1g' + dataId).hide();
 			$(this).removeClass('active outline');
 		}
 	}
