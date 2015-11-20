@@ -16,7 +16,7 @@ $(window).scroll(function() {
 	}
 });
 
-////////////////////////CONTACT FORM CLICK HANDLER//////////////////////////
+////////////CONTACT FORM AND SCREEENSHOTS CLICK HANDLER////////////
 
 $('body').off();
 
@@ -31,7 +31,7 @@ $('body').on(
 					$('.text-field').removeClass('error');
 				}
 			});
-		};
+		}
 		var validateInput = function(i, field) {
 	 		$('.input').blur(function() {
 				if(!$('.input')[i].checkValidity()) {
@@ -41,7 +41,7 @@ $('body').on(
 					$(field).removeClass('error');
 				}
 			});
-		};
+		}
 		validateInput(0, '.firstname-field');
 		validateInput(1, '.lastname-field');
 		validateInput(2, '.company-field');
@@ -52,9 +52,10 @@ $('body').on(
 	}
 );
 
+var html = $("html");
+
 $('body').on(
 	'click', '.formButton', function(evt) {
-		var html = $("html");
 		var open = $('#formModal');
 		open.addClass("scroll");
 		html.addClass("hidden");
@@ -62,11 +63,17 @@ $('body').on(
 );
 
 $('body').on(
+	'click', '#revealImg.reveal', function(evt) {
+		var open = $('.reveal-modal.imgModal');
+		open.addClass("scroll2");
+		html.addClass("hidden2");
+	}
+);
+
+$('body').on(
 	'click', '.close-reveal-modal, .reveal-modal-bg', function(evt) {
-		var html = $("html");
-		var open = $('#formModal');
-		open.removeClass("scroll");
 		html.removeClass("hidden");
+		html.removeClass("hidden2");
 	}
 );
 

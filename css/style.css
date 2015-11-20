@@ -514,8 +514,13 @@ background: #7bb9c5;
 
 /*********************SMALL-MEDIUM SCREEN***********************/
 @media screen and (min-width: 451px) and (max-width: 770px) {
-	.imgModal {
+	.scroll2 {
 		overflow-y: scroll;
+	}
+	.hidden2 {
+		overflow: hidden;
+	}
+	.imgModal {
 		max-height: 500px;
 		bottom: 0px;
 	}
